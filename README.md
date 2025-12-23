@@ -1,4 +1,4 @@
-# Which of the top 20 U.S. Metropolitan Statistical Areas (MSA) show the largest gaps between public transit need and transit supply?
+# Which of the top 20 U.S. Metropolitan Statistical Areas (MSAs) show the largest gaps between public transit need and supply in 2024?
 
 Minh Kiet Tran (Charles Tran)  
 Dung Tri Nguyen (Dune Nguyen)
