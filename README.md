@@ -19,7 +19,7 @@ This project uses publicly available datasets from the United States Census Bure
 - Metropolitan Statistical Areas (MSA) References Files
 
 Sources: 
-- U.S. Census Bureau, 2024: ACS 1-Year Estimates Subject Tables, accessed via data.census.gov.
+- [U.S. Census Bureau, 2024: ACS 1-Year Estimates Subject Tables](https://data.census.gov)
 - [National Transit Dataset - Service (by Mode and Time Period)](https://catalog.data.gov/dataset/service-flat-file)
 - [Annual Database Agency Information](https://www.transit.dot.gov/ntd/data-product/2024-annual-database-agency-information)
 - [U.S. Census Bureau: Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
