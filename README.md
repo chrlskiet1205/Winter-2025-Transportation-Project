@@ -6,10 +6,10 @@ Dung Tri Nguyen (Dune Nguyen)
 ## Data Sources    
 This project uses publicly available datasets from the United States Census Bureau and the Federal Transit Administration.    
 ### 1. American Community Survey (ACS)  
-- Table B01003: Total Population - Census Bureau Table  
-- Table B08301: Means of Transportation to Work  
-- Table B08201: Household Size by Vehicles Available  
-- Table S1902: Mean Income in the Past 12 Months (in 2024 Inflation-Adjusted Dollars)    
+- [Table B01003: Total Population - Census Bureau Table](https://data.census.gov/table/ACSDT1Y2024.B01003?q=B01003&g=010XX00US$3140000&moe=false)
+- [Table B08301: Means of Transportation to Work](https://data.census.gov/table/ACSDT1Y2024.B08301?q=B08301:+Means+of+Transportation+to+Work&moe=false)
+- [Table B08201: Household Size by Vehicles Available](https://data.census.gov/table/ACSDT1Y2024.B08201?q=b08201&g=010XX00US$31000M1&moe=false)
+- [Table S1902: Mean Income in the Past 12 Months (in 2024 Inflation-Adjusted Dollars)](https://data.census.gov/table/ACSST1Y2024.S1902?q=income&g=010XX00US$31000M1&moe=false)
 
 ### 2. Federal Transit Administration
 - National Transit Dataset - Service (by Mode and Time Period)
