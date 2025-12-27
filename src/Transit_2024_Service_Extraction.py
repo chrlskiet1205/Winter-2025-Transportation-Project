@@ -29,6 +29,8 @@ service_cols = [
     ]
 annual_2024_service = service_df[service_df['Report Year'] == 2024][service_cols]
 
+annual_2024_service.columns = ['Agency', 'UZA_Name', 'UACE_Code', 'Report_Year', 'Mode_Name', 'VRM', 'VRH', 'UPT']
+
 #Output to data/raw/transportation/output
 output_annual_service_path = os.path.join(output_folder, 'annual_2024_service.csv')
 annual_2024_service.to_csv(output_annual_service_path, index=False)

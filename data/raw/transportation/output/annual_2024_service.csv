@@ -1,4 +1,4 @@
-Agency,UZA Name,UACE Code,Report Year,Mode Name,Actual Vehicle/Passenger Car Revenue Miles,Actual Vehicle/Passenger Car Revenue Hours,Unlinked Passenger Trips (UPT)
+Agency,UZA_Name,UACE_Code,Report_Year,Mode_Name,VRM,VRH,UPT
 "King County, dba: King County Metro","Seattle--Tacoma, WA",80389.0,2024,Demand Response,,,
 "King County, dba: King County Metro","Seattle--Tacoma, WA",80389.0,2024,Demand Response,,,
 "King County, dba: King County Metro","Seattle--Tacoma, WA",80389.0,2024,Demand Response,,,
