@@ -12,11 +12,11 @@ This project uses publicly available datasets from the United States Census Bure
 - [Table S1902: Mean Income in the Past 12 Months (in 2024 Inflation-Adjusted Dollars)](https://data.census.gov/table/ACSST1Y2024.S1902?q=income&g=010XX00US$31000M1&moe=false)
 
 ### 2. Federal Transit Administration
-- National Transit Dataset - Service (by Mode and Time Period)
-- Annual Database Agency Information
+- [National Transit Dataset - Service (by Mode and Time Period)](https://catalog.data.gov/dataset/service-flat-file)
+- [Annual Database Agency Information](https://www.transit.dot.gov/ntd/data-product/2024-annual-database-agency-information)
 
 ### 3. United States Census Bureau
-- Metropolitan Statistical Areas (MSA) References Files
+- [Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
 
 Sources: 
 - [U.S. Census Bureau, 2024: ACS 1-Year Estimates Subject Tables](https://data.census.gov)
