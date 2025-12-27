@@ -19,7 +19,8 @@ service_df = pd.read_csv(input_annual_service_path, low_memory=False)
 #Columns keep for service dataset
 service_cols = [
     'Agency', 
-    'UZA Name', 
+    'UZA Name',
+    'UACE Code', 
     'Report Year', 
     'Mode Name', 
     'Actual Vehicle/Passenger Car Revenue Miles', 
