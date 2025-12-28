@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+#README: This file create a csv for mapping UZAs to MSAs, with information taken in the agency_information_2024.csv file
+
 # This dictionary includes top 20 MSA names, correlated UZA names, and its UACE codes
 uza_to_msa = {
     "MSA_Name": [
