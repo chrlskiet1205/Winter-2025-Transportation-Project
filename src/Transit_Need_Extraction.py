@@ -1,93 +1,189 @@
 import pandas as pd
+import numpy as np
 import os
+import sys
 
 # ==========================================
-# PATH CONFIGURATION
+# CONFIGURATION
 # ==========================================
-# Get the directory where this script is currently located (i.e., inside 'src')
-script_dir = 'src/Transit_Need_Extraction.py'
-
-# Construct the path to the raw census data
-# We go '..' to go up one level from 'src', then into 'data/raw/census'
+# Base path relative to where you run the script (project root)
 base_path = 'data/raw/census'
-
-# Construct the output path
-output_dir = 'data/processed'
+output_dir = 'data/cleaned-unmerged'
 output_file = 'top20_transit_need.csv'
 
-# ==========================================
-# FILE NAMES
-# ==========================================
-# Update these if your actual file names differ!
-file_pop = 'acs_population_2024.csv'       # Needs 'Total Population'
-file_inc = 'acs_income_2024.csv'           # Needs 'Median Income'
-file_commute = 'acs_means_of_transport_to_work_2024.csv'      # Needs 'Public Transit Share'
-file_vehicle = 'acs_vehicle_ownership_2024.csv'      # Needs 'No Vehicle Available'
-
-# The common column to merge on (e.g. "GEOID" or "NAME")
-merge_col = 'NAME'
+# File Names
+file_pop = 'acs_population_2024.csv'
+file_inc = 'acs_income_2024.csv'
+file_commute = 'acs_means_of_transport_to_work_2024.csv'
+file_vehicle = 'acs_vehicle_ownership_2024.csv'
 
 # ==========================================
-# 1. LOAD DATASETS
+# HELPER FUNCTIONS
 # ==========================================
-print(f"Reading data from: {os.path.abspath(base_path)}")
 
-try:
-    df_pop = pd.read_csv(os.path.join(base_path, file_pop))
-    df_inc = pd.read_csv(os.path.join(base_path, file_inc))
-    df_commute = pd.read_csv(os.path.join(base_path, file_commute))
-    df_vehicle = pd.read_csv(os.path.join(base_path, file_vehicle))
-    print("All files loaded successfully.")
-except FileNotFoundError as e:
-    print(f"\nError: Could not find a file.\n{e}")
-    print("Check that your CSV files are in the 'data/raw/census' folder and match the filenames in the script.")
-    exit()
+def clean_value(val):
+    """Converts strings like '1,234', '12.5%', or '-' to floats."""
+    if pd.isna(val):
+        return np.nan
+    if isinstance(val, (int, float)):
+        return float(val)
+    
+    # Remove hidden characters and standard cleaning
+    val = str(val).strip().replace(',', '').replace('\xa0', '')
+    
+    if val.endswith('%'):
+        return float(val.replace('%', ''))
+    if val in ['-', 'N', '(X)']:
+        return np.nan
+    try:
+        return float(val)
+    except ValueError:
+        return np.nan
+
+def clean_label(label):
+    """Removes non-breaking spaces, regular spaces, and colons."""
+    if pd.isna(label):
+        return ""
+    # Replace non-breaking space with space, strip whitespace, remove trailing colon
+    return str(label).replace('\xa0', ' ').strip().rstrip(':')
+
+def process_standard_acs(full_path, target_col_map):
+    """
+    Reads a standard ACS file, cleans labels, transposes, and extracts vars.
+    Handles duplicate labels by taking the first occurrence.
+    """
+    if not os.path.exists(full_path):
+        print(f"Error: File not found {full_path}")
+        return pd.DataFrame()
+
+    print(f"Processing {os.path.basename(full_path)}...")
+    
+    # Read file
+    df = pd.read_csv(full_path, dtype=str)
+    
+    # Clean the Row Labels (which become columns)
+    # This fixes issues with "Total:" vs "Total" vs "  Total"
+    df['Clean_Label'] = df['Label (Grouping)'].apply(clean_label)
+    
+    # Handle duplicates (e.g., 'No vehicle available' appears multiple times)
+    # We keep the first one, which is usually the 'Total' category
+    df = df.drop_duplicates(subset=['Clean_Label'], keep='first')
+    
+    # Set index and Transpose
+    df = df.set_index('Clean_Label').drop(columns=['Label (Grouping)']).T
+    
+    # Reset index to get City Name
+    df = df.reset_index()
+    df.rename(columns={'index': 'NAME_RAW'}, inplace=True)
+    
+    # Clean City Name
+    df['NAME'] = df['NAME_RAW'].apply(lambda x: x.split('!!')[0].strip())
+    
+    out_df = df[['NAME']].copy()
+    
+    # Extract columns based on cleaned map
+    for csv_clean_label, new_name in target_col_map.items():
+        if csv_clean_label in df.columns:
+            out_df[new_name] = df[csv_clean_label].apply(clean_value)
+        else:
+            print(f"  Warning: '{csv_clean_label}' not found in file.")
+            out_df[new_name] = np.nan
+            
+    return out_df
+
+def process_income_acs(full_path):
+    """Special handler for Income file which has unique structure."""
+    if not os.path.exists(full_path):
+        print(f"Error: File not found {full_path}")
+        return pd.DataFrame()
+
+    print(f"Processing {os.path.basename(full_path)}...")
+    df = pd.read_csv(full_path, header=None, dtype=str)
+    
+    header_row = df.iloc[0]
+    target_metric = "Median income (dollars)"
+    if not header_row.str.contains(target_metric, regex=False).any():
+        target_metric = "Mean income (dollars)"
+    
+    data = []
+    for col_idx, cell_val in enumerate(header_row):
+        if pd.isna(cell_val): continue
+        if target_metric in str(cell_val) and "!!Estimate" in str(cell_val):
+            city_name = str(cell_val).split('!!')[0].strip()
+            
+            # Find the "All households" or "Total" row
+            val = np.nan
+            for row_idx in range(1, min(10, len(df))):
+                label = str(df.iloc[row_idx, 0])
+                if "All households" in label or "Total" in clean_label(label):
+                    val = clean_value(df.iloc[row_idx, col_idx])
+                    break
+            data.append({'NAME': city_name, 'Median Income': val})
+            
+    return pd.DataFrame(data)
 
 # ==========================================
-# 2. IDENTIFY TOP 20 MSAs
+# MAIN EXECUTION
 # ==========================================
-print("Identifying Top 20 MSAs by Population...")
 
-# Adjust 'Total Population' to your actual column name if different
-pop_col_name = 'Total Population' 
+# 1. POPULATION
+# Clean label in CSV is "Total"
+path_pop = os.path.join(base_path, file_pop)
+df_pop = process_standard_acs(path_pop, {
+    'Total': 'Total Population'
+})
 
-if pop_col_name not in df_pop.columns:
-    print(f"WARNING: Column '{pop_col_name}' not found. Available columns: {list(df_pop.columns)}")
-    # If the script fails here, copy-paste the printed column names to fix 'pop_col_name' above
-    exit()
+if df_pop.empty:
+    print("CRITICAL ERROR: Population data not loaded. Stopping.")
+    sys.exit(1)
 
-# Sort by population descending and take top 20
-top_20_pop = df_pop.sort_values(by=pop_col_name, ascending=False).head(20)
-top_20_ids = top_20_pop[merge_col].unique()
+# 2. VEHICLE OWNERSHIP
+# Clean label in CSV is "No vehicle available"
+path_vehicle = os.path.join(base_path, file_vehicle)
+df_vehicle = process_standard_acs(path_vehicle, {
+    'No vehicle available': 'No Vehicle Available'
+})
 
-print(f"Top 20 MSAs identified. First 3: {top_20_ids[:3]}")
+# 3. COMMUTE (TRANSIT)
+# Clean labels: "Total", "Public transportation (excluding taxicab)"
+path_commute = os.path.join(base_path, file_commute)
+df_commute = process_standard_acs(path_commute, {
+    'Total': 'Total Workers',
+    'Public transportation (excluding taxicab)': 'Transit Count'
+})
+
+# Calculation
+if not df_commute.empty:
+    df_commute['Public Transit Share'] = (df_commute['Transit Count'] / df_commute['Total Workers'])
+else:
+    df_commute['Public Transit Share'] = np.nan
+
+# 4. INCOME
+path_inc = os.path.join(base_path, file_inc)
+df_inc = process_income_acs(path_inc)
 
 # ==========================================
-# 3. FILTER & MERGE
+# MERGE
 # ==========================================
-print("Merging datasets...")
+print("\nMerging Datasets...")
 
-# Start with the population dataframe
-transit_need_df = top_20_pop[[merge_col, pop_col_name]].copy()
+merged_df = df_pop.copy()
+merged_df = merged_df.sort_values(by='Total Population', ascending=False).head(20)
 
-# Helper function to merge a specific column from other files
-def merge_data(base_df, source_df, col_name):
-    # Filter source to only Top 20
-    filtered = source_df[source_df[merge_col].isin(top_20_ids)]
-    # Merge
-    return base_df.merge(filtered[[merge_col, col_name]], on=merge_col, how='left')
+print(f"Top 5 MSAs by Population: {merged_df['NAME'].head(5).tolist()}")
 
-# NOTE: Ensure these column names ('Median Income', etc.) match your CSV headers
-transit_need_df = merge_data(transit_need_df, df_inc, 'Median Income')
-transit_need_df = merge_data(transit_need_df, df_commute, 'Public Transit Share')
-transit_need_df = merge_data(transit_need_df, df_vehicle, 'No Vehicle Available')
+merged_df = merged_df.merge(df_inc, on='NAME', how='left')
+merged_df = merged_df.merge(df_vehicle[['NAME', 'No Vehicle Available']], on='NAME', how='left')
+merged_df = merged_df.merge(df_commute[['NAME', 'Public Transit Share']], on='NAME', how='left')
 
 # ==========================================
-# 4. EXPORT
+# SAVE
 # ==========================================
-os.makedirs(output_dir, exist_ok=True) # Create output directory if it doesn't exist
-output_path = os.path.join(output_dir, output_file)
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 
-transit_need_df.to_csv(output_path, index=False)
-print(f"Success! Data extracted to: {os.path.abspath(output_path)}")
-print(transit_need_df.head())
+out_path = os.path.join(output_dir, output_file)
+merged_df.to_csv(out_path, index=False)
+
+print(f"\nSuccess! Data saved to: {out_path}")
+print(merged_df[['NAME', 'Total Population', 'Public Transit Share']].head())
