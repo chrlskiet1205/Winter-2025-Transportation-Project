@@ -40,6 +40,8 @@ aggregated_df = filtered_service_df.groupby('UACE_Code', as_index=False).agg({
     'UPT': 'sum',
 })
 
+aggregated_df = aggregated_df.sort_values(by='UZA_Pop', ascending=False)
+
 #Output
 output_path = os.path.join(output_folder, 'transit_supply.csv')
 aggregated_df.to_csv(output_path, index=False)

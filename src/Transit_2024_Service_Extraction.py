@@ -42,6 +42,11 @@ annual_2024_service = service_df[
     (~service_df['Mode Name'].isin(['Vanpool', 'Demand Response']))
 ][service_cols]
 
+#Convert the UACE Code column to int64
+annual_2024_service['UACE Code'] = (
+    pd.to_numeric(annual_2024_service['UACE Code'], errors='coerce').astype('Int64')
+)
+
 annual_2024_service.columns = ['Agency', 'UZA_Name', 'UACE_Code', 'Report_Year', 'Mode_Name', 'Service_Type', 'UZA_Area(Sq Miles)', 'UZA_Pop', 'Service_Area(Sq Miles)', 'Service_Area_Pop', 'Time_Period', 'VRM', 'VRH', 'UPT']
 
 #Output to data/raw/transportation/output
