@@ -23,13 +23,18 @@ service_cols = [
     'UACE Code', 
     'Report Year', 
     'Mode Name', 
+    'UZA Area Sq Miles',
+    'UZA Population',
+    'Service Area Sq Miles',
+    'Service Area Population',
+    'Time Period',
     'Actual Vehicle/Passenger Car Revenue Miles', 
     'Actual Vehicle/Passenger Car Revenue Hours', 
     'Unlinked Passenger Trips (UPT)'
     ]
 annual_2024_service = service_df[service_df['Report Year'] == 2024][service_cols]
 
-annual_2024_service.columns = ['Agency', 'UZA_Name', 'UACE_Code', 'Report_Year', 'Mode_Name', 'VRM', 'VRH', 'UPT']
+annual_2024_service.columns = ['Agency', 'UZA_Name', 'UACE_Code', 'Report_Year', 'Mode_Name', 'UZA_Area(Sq Miles)', 'UZA_Pop', 'Service_Area(Sq Miles)', 'Service_Area_Pop', 'Time_Period', 'VRM', 'VRH', 'UPT']
 
 #Output to data/raw/transportation/output
 output_annual_service_path = os.path.join(output_folder, 'annual_2024_service.csv')
