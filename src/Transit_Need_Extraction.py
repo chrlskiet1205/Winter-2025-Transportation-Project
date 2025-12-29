@@ -176,6 +176,16 @@ merged_df = merged_df.merge(df_inc, on='NAME', how='left')
 merged_df = merged_df.merge(df_vehicle[['NAME', 'No Vehicle Available']], on='NAME', how='left')
 merged_df = merged_df.merge(df_commute[['NAME', 'Public Transit Share']], on='NAME', how='left')
 
+# --- CLEANING & INDEXING ---
+# Remove " Metro Area" from the NAME column
+merged_df['NAME'] = merged_df['NAME'].str.replace(' Metro Area', '', regex=False)
+
+# Create an index column (Rank 1 to 20)
+merged_df.reset_index(drop=True, inplace=True)
+merged_df.index = merged_df.index + 1
+merged_df.index.name = 'Rank'
+merged_df.reset_index(inplace=True) # Move Rank into the columns
+
 # ==========================================
 # SAVE
 # ==========================================
@@ -186,4 +196,4 @@ out_path = os.path.join(output_dir, output_file)
 merged_df.to_csv(out_path, index=False)
 
 print(f"\nSuccess! Data saved to: {out_path}")
-print(merged_df[['NAME', 'Total Population', 'Public Transit Share']].head())
+print(merged_df[['Rank', 'NAME', 'Total Population', 'Public Transit Share']].head())
