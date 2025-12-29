@@ -101,7 +101,7 @@ def process_income_acs(full_path):
     df = pd.read_csv(full_path, header=None, dtype=str)
     
     header_row = df.iloc[0]
-    target_metric = "Median income (dollars)"
+    target_metric = "Mean income (dollars)"
     if not header_row.str.contains(target_metric, regex=False).any():
         target_metric = "Mean income (dollars)"
     
@@ -118,7 +118,7 @@ def process_income_acs(full_path):
                 if "All households" in label or "Total" in clean_label(label):
                     val = clean_value(df.iloc[row_idx, col_idx])
                     break
-            data.append({'NAME': city_name, 'Median Income': val})
+            data.append({'NAME': city_name, 'Mean Income': val})
             
     return pd.DataFrame(data)
 
@@ -127,7 +127,6 @@ def process_income_acs(full_path):
 # ==========================================
 
 # 1. POPULATION
-# Clean label in CSV is "Total"
 path_pop = os.path.join(base_path, file_pop)
 df_pop = process_standard_acs(path_pop, {
     'Total': 'Total Population'
@@ -138,21 +137,20 @@ if df_pop.empty:
     sys.exit(1)
 
 # 2. VEHICLE OWNERSHIP
-# Clean label in CSV is "No vehicle available"
 path_vehicle = os.path.join(base_path, file_vehicle)
 df_vehicle = process_standard_acs(path_vehicle, {
+    'Total': 'Total households',
     'No vehicle available': 'No Vehicle Available'
 })
 
 # 3. COMMUTE (TRANSIT)
-# Clean labels: "Total", "Public transportation (excluding taxicab)"
 path_commute = os.path.join(base_path, file_commute)
 df_commute = process_standard_acs(path_commute, {
     'Total': 'Total Workers',
     'Public transportation (excluding taxicab)': 'Transit Count'
 })
 
-# Calculation
+# Calculation for Commute
 if not df_commute.empty:
     df_commute['Public Transit Share'] = (df_commute['Transit Count'] / df_commute['Total Workers'])
 else:
@@ -173,8 +171,32 @@ merged_df = merged_df.sort_values(by='Total Population', ascending=False).head(2
 print(f"Top 5 MSAs by Population: {merged_df['NAME'].head(5).tolist()}")
 
 merged_df = merged_df.merge(df_inc, on='NAME', how='left')
-merged_df = merged_df.merge(df_vehicle[['NAME', 'No Vehicle Available']], on='NAME', how='left')
-merged_df = merged_df.merge(df_commute[['NAME', 'Public Transit Share']], on='NAME', how='left')
+
+# --- Merge Vehicle Data ---
+merged_df = merged_df.merge(
+    df_vehicle[['NAME', 'Total households', 'No Vehicle Available']], 
+    on='NAME', 
+    how='left'
+)
+
+# UPDATED: Calculate Percentage and Reorder
+merged_df['Pct No Vehicle Available'] = merged_df['No Vehicle Available'] / merged_df['Total households']
+
+# Move 'Pct No Vehicle Available' to the left of 'No Vehicle Available'
+cols = list(merged_df.columns)
+cols.remove('Pct No Vehicle Available')
+# Find the position of 'No Vehicle Available'
+target_idx = cols.index('No Vehicle Available')
+# Insert Pct before it
+cols.insert(target_idx, 'Pct No Vehicle Available')
+merged_df = merged_df[cols]
+
+# --- Merge Commute Data ---
+merged_df = merged_df.merge(
+    df_commute[['NAME', 'Transit Count', 'Total Workers', 'Public Transit Share']], 
+    on='NAME', 
+    how='left'
+)
 
 # --- CLEANING & INDEXING ---
 # Remove " Metro Area" from the NAME column
@@ -196,4 +218,5 @@ out_path = os.path.join(output_dir, output_file)
 merged_df.to_csv(out_path, index=False)
 
 print(f"\nSuccess! Data saved to: {out_path}")
-print(merged_df[['Rank', 'NAME', 'Total Population', 'Public Transit Share']].head())
+# Displaying the new column structure
+print(merged_df[['Rank', 'NAME', 'Total households', 'Pct No Vehicle Available', 'No Vehicle Available']].head())
