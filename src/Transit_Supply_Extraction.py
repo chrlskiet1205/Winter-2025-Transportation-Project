@@ -15,7 +15,7 @@ map_path = os.path.join(input_folder, map_file)
 annual_2024_service_path = os.path.join(input_folder, annual_2024_service_file) 
 
 #Convert csv files to DataFrame
-map_df_uacecode_only = pd.read_csv(map_path, dtype=str)['UACE_Code']
+map_df_uacecode_only = pd.read_csv(map_path, dtype=str)['UACE_Code'] #Take only UACE_Code from uza_to_msa.csv file
 annual_2024_service_df = pd.read_csv(annual_2024_service_path).dropna()
 
 annual_2024_service_df['UACE_Code'] = annual_2024_service_df['UACE_Code'].astype('int64').astype(str)
@@ -41,6 +41,7 @@ aggregated_df = filtered_service_df.groupby('UACE_Code', as_index=False).agg({
 })
 
 aggregated_df = aggregated_df.sort_values(by='UZA_Pop', ascending=False)
+aggregated_df['UZA_Name'] = aggregated_df['UZA_Name'].str.replace("--","-", regex=False) #Process to delete double hyphen from UZA Names
 
 #Output
 output_path = os.path.join(output_folder, 'transit_supply.csv')
