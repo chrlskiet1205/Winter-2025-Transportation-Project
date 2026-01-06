@@ -37,7 +37,6 @@ aggregated_df = filtered_service_df.groupby('UACE_Code', as_index=False).agg({
     'Time_Period': 'first',
     'VRM': 'sum',
     'VRH': 'sum',
-    'UPT': 'sum',
 })
 
 aggregated_df = aggregated_df.sort_values(by='UZA_Pop', ascending=False)
