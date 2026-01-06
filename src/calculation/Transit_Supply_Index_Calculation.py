@@ -24,22 +24,18 @@ supply_index_df = pd.read_csv(input_path)
 uza_service_population = supply_index_df['Service_Area_Pop']
 VRM_per_capita: pd.Series = calculating_per_capita(supply_index_df['VRM'], uza_service_population)
 VRH_per_capita: pd.Series = calculating_per_capita(supply_index_df['VRH'], uza_service_population)
-UPT_per_capita: pd.Series = calculating_per_capita(supply_index_df['UPT'], uza_service_population)
 
 #Calculating mean values
 VRM_mean = VRM_per_capita.mean()
 VRH_mean = VRH_per_capita.mean()
-UPT_mean = UPT_per_capita.mean()
 
 #Calculating std
 VRM_std = VRM_per_capita.std()
 VRH_std = VRH_per_capita.std()
-UPT_std = UPT_per_capita.std()
 
 #Calculating supply index for each UZAs
 VRM_z = z_calculation(VRM_per_capita, VRM_mean, VRM_std)
 VRH_z = z_calculation(VRH_per_capita, VRH_mean, VRH_std)
-UPT_z = z_calculation(UPT_per_capita, UPT_mean, UPT_std)
 
-supply_index = index_calculation(VRM_z, VRH_z, UPT_z)
-print(UPT_z)
+supply_index = index_calculation(VRM_z, VRH_z)
+print(VRM_z)
