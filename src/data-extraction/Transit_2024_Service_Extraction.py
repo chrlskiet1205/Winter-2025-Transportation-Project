@@ -30,8 +30,7 @@ service_cols = [
     'Service Area Population',
     'Time Period',
     'Actual Vehicle/Passenger Car Revenue Miles', 
-    'Actual Vehicle/Passenger Car Revenue Hours', 
-    'Unlinked Passenger Trips (UPT)'
+    'Actual Vehicle/Passenger Car Revenue Hours'
     ]
 
 ## Extract rows for 2024, where the time period is 'Annual Total', the service type is either 'DO' or 'PT', and ignore Vanpool and Demand Response Mode
@@ -47,7 +46,7 @@ annual_2024_service['UACE Code'] = (
     pd.to_numeric(annual_2024_service['UACE Code'], errors='coerce').astype('Int64')
 )
 
-annual_2024_service.columns = ['Agency', 'UZA_Name', 'UACE_Code', 'Report_Year', 'Mode_Name', 'Service_Type', 'UZA_Area(Sq Miles)', 'UZA_Pop', 'Service_Area(Sq Miles)', 'Service_Area_Pop', 'Time_Period', 'VRM', 'VRH', 'UPT']
+annual_2024_service.columns = ['Agency', 'UZA_Name', 'UACE_Code', 'Report_Year', 'Mode_Name', 'Service_Type', 'UZA_Area(Sq Miles)', 'UZA_Pop', 'Service_Area(Sq Miles)', 'Service_Area_Pop', 'Time_Period', 'VRM', 'VRH']
 
 #Output to data/raw/transportation/output
 output_annual_service_path = os.path.join(output_folder, 'annual_2024_service.csv')
