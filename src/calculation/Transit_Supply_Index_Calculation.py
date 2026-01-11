@@ -64,6 +64,6 @@ df = pd.DataFrame(data={
     "Scaled Supply Index": scaled_supply_index,
 }).set_index('Rank')
 
-df.to_csv(output_path, index=False)
+df.to_csv(output_path)
 
 print("Done")
