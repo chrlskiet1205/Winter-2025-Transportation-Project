@@ -1,4 +1,4 @@
-Rank,MSA_Name,no_vehicle_pct(Standardized),transit_commute_pct(Standardized),z_mean_income(Standardized),need_index
+Rank,MSA_Name,no_vehicle_pct(Standardized),transit_commute_pct(Standardized),z_mean_income(Standardized),Need Index
 1,"New York-Newark-Jersey City, NY-NJ",4.1874,3.9432,0.7542,2.4588
 2,"Los Angeles-Long Beach-Anaheim, CA",0.0371,0.1735,0.3004,-0.0299
 3,"Chicago-Naperville-Elgin, IL-IN",0.8959,1.0028,-0.0148,0.6378
