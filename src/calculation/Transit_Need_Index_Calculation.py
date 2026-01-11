@@ -61,7 +61,7 @@ df = pd.DataFrame(data={
     "no_vehicle_pct(Standardized)": z_no_vehicle_pct,
     "transit_commute_pct(Standardized)": z_transit_commute_pct,
     "z_mean_income(Standardized)": z_mean_income,
-    "need_index": need_index
+    "Need Index": need_index
 })
 
 # Save the dataframe to CSV
