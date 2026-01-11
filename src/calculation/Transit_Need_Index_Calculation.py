@@ -13,11 +13,8 @@ def index_calculation(
     Calculates an unweighted transit need index.
     Higher income = lower need, so income is inverted.
     """
-    return (
-        z_no_vehicle +
-        z_transit_commute -
-        z_mean_income
-    ) / 3
+    result = round((z_no_vehicle + z_transit_commute - z_mean_income) / 3, 4)
+    return result
 
 # Input files
 input_folder = 'data/processed'
@@ -55,8 +52,6 @@ z_mean_income = z_calculation(mean_income, mean_income.median(), iqr_mean_income
 # Calculate need index
 need_index = index_calculation(z_no_vehicle_pct, z_transit_commute_pct, z_mean_income)
 
-print(need_index)
-
 output_path = os.path.join(output_folder, 'transit_need_index.csv')
 
 # Fixed: Changed 'processed_dataset' to 'need_index_df' and added missing comma
@@ -69,5 +64,7 @@ df = pd.DataFrame(data={
     "need_index": need_index
 })
 
-# Save the dataframe to CSV (this was missing in your snippet)
+# Save the dataframe to CSV
 df.to_csv(output_path, index=False)
+
+print("Done")
