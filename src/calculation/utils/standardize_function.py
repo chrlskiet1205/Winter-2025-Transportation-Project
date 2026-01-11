@@ -14,6 +14,7 @@ def z_calculation(data:pd.Series, mean, std) -> pd.Series:
     return_lst = []
 
     for x in data:
-        return_lst.append((x-mean)/std)
+        result = round(((x-mean)/std), 4)
+        return_lst.append(result)
 
     return pd.Series(return_lst)

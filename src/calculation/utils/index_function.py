@@ -12,6 +12,6 @@ def index_calculation(*args: pd.Series) -> pd.Series:
     # 3. Round the result
     
     df = pd.concat(args, axis='columns')
-    index_series = df.mean(axis='columns').round(2)
+    index_series = df.mean(axis='columns').round(4)
     
     return index_series
