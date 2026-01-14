@@ -49,8 +49,8 @@ VRM_z = z_calculation(VRM_per_capita, VRM_median, iqr_VRM)
 VRH_z = z_calculation(VRH_per_capita, VRH_median, iqr_VRH)
 
 #Scale z_score VRM and VRH
-VRM_scaled = VRM_z * ratio
-VRH_scaled = VRH_z * ratio
+VRM_scaled = round(VRM_z * ratio, 4)
+VRH_scaled = round(VRH_z * ratio, 4)
 
 #Calculating Supply Indexes and Scaled Supply Indexes (by UZAs)
 supply_index = index_calculation(VRM_z, VRH_z)
