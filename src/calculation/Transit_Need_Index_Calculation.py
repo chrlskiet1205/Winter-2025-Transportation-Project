@@ -37,9 +37,11 @@ mean_income = need_index_df['Mean Income']
 q1_no_vehicle_pct = np.percentile(no_vehicle_pct, 25)
 q3_no_vehicle_pct = np.percentile(no_vehicle_pct, 75)
 iqr_no_vehicle_pct = q3_no_vehicle_pct - q1_no_vehicle_pct
+
 q1_transit_commute_pct = np.percentile(transit_commute_pct, 25)
 q3_transit_commute_pct = np.percentile(transit_commute_pct, 75)
 iqr_transit_commute_pct = q3_transit_commute_pct - q1_transit_commute_pct
+
 q1_mean_income = np.percentile(mean_income, 25)
 q3_mean_income = np.percentile(mean_income, 75)
 iqr_mean_income = q3_mean_income - q1_mean_income
