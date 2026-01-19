@@ -11,6 +11,7 @@
 ## I/ Motivation & Background
 
 ## II/ Research Question
+Which of the 20 largest U.S. metropolitan statistical areas exhibit the largest gaps between public transit need and public transit supply?
 
 ## III/ Data Sources
 This project uses publicly available datasets from the United States Census Bureau and the Federal Transit Administration.    
@@ -31,6 +32,14 @@ This project uses publicly available datasets from the United States Census Bure
 
 ## V/ Methodology
 ### Transit Need Index
+Transit need was approximated using the following variables:
+
+- Percentage of households with no vehicle available
+- Percentage of workers commuting via public transit
+- Mean household income (inverted to reflect higher need at lower incomes)
+
+Each variable was standardized using a robust z-score based on the median and interquartile range (IQR).
+The final Transit Need Index is calculated as the unweighted mean of the standardized variables.
 ### Transit Supply Index
 ### Transit Gap Metric
 
