@@ -55,7 +55,6 @@ Transit supply was measured using National Transit Database service metrics:
 
 All metrics were aggregated from the transit agency level to the MSA level and normalized by population.
 Standardization followed the same robust z-score approach used for the Transit Need Index.
-### Transit Gap Metric
 ### Transit Need–Supply Gap
 
 The Transit Gap metric is defined as the difference between the Transit Need Index and the Transit Supply Index:
