@@ -47,7 +47,23 @@ The final Transit Need Index is calculated as the unweighted mean of the standar
 
 $$Transit Need Index = (Z_(noVehicle) + Z_(transitCommute) − Z_(income)) / 3$$
 ### Transit Supply Index
+Transit supply was measured using National Transit Database service metrics:
+
+- Vehicle Revenue Miles (VRM) per capita
+- Vehicle Revenue Hours (VHM) per capita
+- Unlinked Passenger Trips (UPT) per capita
+
+All metrics were aggregated from the transit agency level to the MSA level and normalized by population.
+Standardization followed the same robust z-score approach used for the Transit Need Index.
 ### Transit Gap Metric
+### Transit Need–Supply Gap
+
+The Transit Gap metric is defined as the difference between the Transit Need Index and the Transit Supply Index:
+
+Transit Gap = Transit Need Index − Transit Supply Index
+
+Positive values indicate MSAs where transit need exceeds supply,
+while negative values indicate relatively higher levels of transit provision.
 
 ## VI. Key Findings
 
