@@ -45,7 +45,7 @@ Transit need was approximated using the following variables:
 Each variable was standardized using a **robust z-score** based on the median and interquartile range (IQR).
 The final Transit Need Index is calculated as the unweighted mean of the standardized variables:
 
-$Transit Need Index = (Z_noVehicle + Z_transitCommute − Z_income) / 3$
+$Transit Need Index = (Z_(noVehicle) + Z(_transitCommute) − Z_(income)) / 3$
 ### Transit Supply Index
 ### Transit Gap Metric
 
