@@ -8,12 +8,12 @@
 
 <hr>
 
-## I/ Motivation & Background
+## I. Motivation & Background
 
-## II/ Research Question
+## II. Research Question
 Which of the 20 largest U.S. metropolitan statistical areas exhibit the largest gaps between public transit need and public transit supply?
 
-## III/ Data Sources
+## III. Data Sources
 This project uses publicly available datasets from the United States Census Bureau and the Federal Transit Administration.    
 ### 1. American Community Survey (ACS)  
 - [Table B01003: Total Population - Census Bureau Table](https://data.census.gov/table/ACSDT1Y2024.B01003?q=B01003&g=010XX00US$3140000&moe=false)
@@ -28,9 +28,9 @@ This project uses publicly available datasets from the United States Census Bure
 ### 3. United States Census Bureau
 - [Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
   
-## IV/ Unit of Analysis
+## IV. Unit of Analysis
 
-## V/ Methodology
+## V. Methodology
 ### Transit Need Index
 Transit need was approximated using the following variables:
 
@@ -45,11 +45,11 @@ $Transit Need Index = (Z_(no_vehicle) + Z_(transit_commute) − Z_(income)) / 3$
 ### Transit Supply Index
 ### Transit Gap Metric
 
-## VI/ Key Findings
+## VI. Key Findings
 
-## VII/ Limitations
+## VII. Limitations
 
-## VIII/ Authors
+## VIII. Authors
 Minh Kiet Tran (Charles Tran)  
 Dung Tri Nguyen (Dune Nguyen)
 
