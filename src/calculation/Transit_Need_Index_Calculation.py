@@ -7,13 +7,13 @@ from utils.standardize_function import z_calculation
 def index_calculation(
     z_no_vehicle: pd.Series,
     z_transit_commute: pd.Series,
-    z_mean_income: pd.Series
+    z_median_income: pd.Series
 ) -> pd.Series:
     """
     Calculates an unweighted transit need index.
     Higher income = lower need, so income is inverted.
     """
-    result = round((z_no_vehicle + z_transit_commute - z_mean_income) / 3, 4)
+    result = round((z_no_vehicle + z_transit_commute - z_median_income) / 3, 4)
     return result
 
 # Input files
@@ -31,7 +31,7 @@ pd.options.display.float_format = "{:,.4f}".format
 # Assign DFs
 no_vehicle_pct = need_index_df['Pct No Vehicle Available']
 transit_commute_pct = need_index_df['Public Transit Share']
-mean_income = need_index_df['Mean Income']
+median_income = need_index_df['Median Income']
 
 # Calculate IQR 
 q1_no_vehicle_pct = np.percentile(no_vehicle_pct, 25)
@@ -42,17 +42,17 @@ q1_transit_commute_pct = np.percentile(transit_commute_pct, 25)
 q3_transit_commute_pct = np.percentile(transit_commute_pct, 75)
 iqr_transit_commute_pct = q3_transit_commute_pct - q1_transit_commute_pct
 
-q1_mean_income = np.percentile(mean_income, 25)
-q3_mean_income = np.percentile(mean_income, 75)
-iqr_mean_income = q3_mean_income - q1_mean_income
+q1_median_income = np.percentile(median_income, 25)
+q3_median_income = np.percentile(median_income, 75)
+iqr_median_income = q3_median_income - q1_median_income
 
 # Calculate z-score
 z_no_vehicle_pct = z_calculation(no_vehicle_pct, no_vehicle_pct.median(), iqr_no_vehicle_pct)
 z_transit_commute_pct = z_calculation(transit_commute_pct, transit_commute_pct.median(), iqr_transit_commute_pct)
-z_mean_income = z_calculation(mean_income, mean_income.median(), iqr_mean_income)
+z_median_income = z_calculation(median_income, median_income.median(), iqr_median_income)
 
 # Calculate need index
-need_index = index_calculation(z_no_vehicle_pct, z_transit_commute_pct, z_mean_income)
+need_index = index_calculation(z_no_vehicle_pct, z_transit_commute_pct, z_median_income)
 
 output_path = os.path.join(output_folder, 'transit_need_index.csv')
 
@@ -62,7 +62,7 @@ df = pd.DataFrame(data={
     "MSA_Name": need_index_df['NAME'],
     "no_vehicle_pct(Standardized)": z_no_vehicle_pct,
     "transit_commute_pct(Standardized)": z_transit_commute_pct,
-    "z_mean_income(Standardized)": z_mean_income,
+    "z_median_income(Standardized)": z_median_income,
     "Need Index": need_index
 })
 
