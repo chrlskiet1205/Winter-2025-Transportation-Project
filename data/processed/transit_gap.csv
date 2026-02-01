@@ -1,21 +1,21 @@
 Rank,MSA_Name,UZA_Name,Need Index,Scaled Supply Index,Transit Gap
-1,"New York-Newark-Jersey City, NY-NJ","New York-Jersey City-Newark, NY-NJ",2.4588,0.6537,1.8051
-2,"Los Angeles-Long Beach-Anaheim, CA","Los Angeles-Long Beach-Anaheim, CA",-0.0299,0.1962,-0.2261
-3,"Chicago-Naperville-Elgin, IL-IN","Chicago, IL-IN",0.6378,0.3227,0.3151
-4,"Dallas-Fort Worth-Arlington, TX","Dallas-Fort Worth-Arlington, TX",-0.2428,0.0398,-0.2826
-5,"Houston-Pasadena-The Woodlands, TX","Houston, TX",-0.0424,-0.1314,0.089
-6,"Miami-Fort Lauderdale-West Palm Beach, FL","Miami-Fort Lauderdale, FL",0.1191,0.0021,0.117
-7,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Washington-Arlington, DC-VA-MD",0.0189,0.1045,-0.0856
-8,"Atlanta-Sandy Springs-Roswell, GA","Atlanta, GA",-0.1759,-0.0032,-0.1727
-9,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Philadelphia, PA-NJ-DE-MD",0.5104,0.2289,0.2815
-10,"Phoenix-Mesa-Chandler, AZ","Phoenix-Mesa-Scottsdale, AZ",-0.1457,-0.0193,-0.1264
-11,"Boston-Cambridge-Newton, MA-NH","Boston, MA-NH",0.248,0.0194,0.2286
-12,"Riverside-San Bernardino-Ontario, CA","Riverside-San Bernardino, CA",-0.1496,-0.1007,-0.0489
-13,"San Francisco-Oakland-Fremont, CA","San Francisco-Oakland, CA",-0.0233,0.3649,-0.3882
-14,"Detroit-Warren-Dearborn, MI","Detroit, MI",0.1884,-0.2859,0.4743
-15,"Seattle-Tacoma-Bellevue, WA","Seattle-Tacoma, WA",-0.1247,0.0433,-0.168
-16,"Minneapolis-St. Paul-Bloomington, MN-WI","Minneapolis-St. Paul, MN",-0.0292,-0.0618,0.0326
-17,"Tampa-St. Petersburg-Clearwater, FL","Tampa-St. Petersburg, FL",0.0333,-0.4488,0.4821
-18,"San Diego-Chula Vista-Carlsbad, CA","San Diego, CA",-0.3663,-0.1069,-0.2594
-19,"Denver-Aurora-Centennial, CO","Denver-Aurora, CO",-0.3398,-0.2433,-0.0965
-20,"Orlando-Kissimmee-Sanford, FL","Orlando, FL",-0.005,-0.2825,0.2775
+1,"New York-Newark-Jersey City, NY-NJ","New York-Jersey City-Newark, NY-NJ",2.8688,0.6537,2.2151
+2,"Los Angeles-Long Beach-Anaheim, CA","Los Angeles-Long Beach-Anaheim, CA",0.2064,0.1962,0.0102
+3,"Chicago-Naperville-Elgin, IL-IN","Chicago, IL-IN",0.924,0.3227,0.6013
+4,"Dallas-Fort Worth-Arlington, TX","Dallas-Fort Worth-Arlington, TX",-0.0556,0.0398,-0.0954
+5,"Houston-Pasadena-The Woodlands, TX","Houston, TX",-0.3061,-0.1314,-0.1747
+6,"Miami-Fort Lauderdale-West Palm Beach, FL","Miami-Fort Lauderdale, FL",0.2113,0.0021,0.2092
+7,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Washington-Arlington, DC-VA-MD",0.4889,0.1045,0.3844
+8,"Atlanta-Sandy Springs-Roswell, GA","Atlanta, GA",-0.1714,-0.0032,-0.1682
+9,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Philadelphia, PA-NJ-DE-MD",0.6565,0.2289,0.4276
+10,"Phoenix-Mesa-Chandler, AZ","Phoenix-Mesa-Scottsdale, AZ",-0.4075,-0.0193,-0.3882
+11,"Boston-Cambridge-Newton, MA-NH","Boston, MA-NH",0.6009,0.0194,0.5815
+12,"Riverside-San Bernardino-Ontario, CA","Riverside-San Bernardino, CA",-0.4174,-0.1007,-0.3167
+13,"San Francisco-Oakland-Fremont, CA","San Francisco-Oakland, CA",0.2909,0.3649,-0.074
+14,"Detroit-Warren-Dearborn, MI","Detroit, MI",0.0918,-0.2859,0.3777
+15,"Seattle-Tacoma-Bellevue, WA","Seattle-Tacoma, WA",0.3222,0.0433,0.2789
+16,"Minneapolis-St. Paul-Bloomington, MN-WI","Minneapolis-St. Paul, MN",-0.2822,-0.0618,-0.2204
+17,"Tampa-St. Petersburg-Clearwater, FL","Tampa-St. Petersburg, FL",0.0657,-0.4488,0.5145
+18,"San Diego-Chula Vista-Carlsbad, CA","San Diego, CA",-0.6002,-0.1069,-0.4933
+19,"Denver-Aurora-Centennial, CO","Denver-Aurora, CO",-0.5735,-0.2433,-0.3302
+20,"Orlando-Kissimmee-Sanford, FL","Orlando, FL",-0.2805,-0.2825,0.002
