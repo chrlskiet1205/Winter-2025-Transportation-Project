@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import os
 import sys
-import re
 
 # ==========================================
 # CONFIGURATION
@@ -93,99 +92,35 @@ def process_standard_acs(full_path, target_col_map):
     return out_df
 
 def process_income_acs(full_path):
-    """Special handler for Income file which has unique structure.
-
-    Extracts Median Income from the ACS income CSV using the "Households" row
-    when available. If a median is not available for an MSA, the function will
-    fall back to an available Mean Income column in the same ACS file. Any
-    remaining gaps will be filled from `data/processed/finalized.csv`'s
-    `Mean Income` where possible.
-    """
+    """Special handler for Income file which has unique structure."""
     if not os.path.exists(full_path):
         print(f"Error: File not found {full_path}")
         return pd.DataFrame()
 
     print(f"Processing {os.path.basename(full_path)}...")
     df = pd.read_csv(full_path, header=None, dtype=str)
-
-    header_row = df.iloc[0].astype(str)
-
-    med_data = {}
-    mean_data = {}
-
-    # Scan header row for Median/Mean income columns
+    
+    header_row = df.iloc[0]
+    target_metric = "Median income (dollars)"
+    if not header_row.str.contains(target_metric, regex=False).any():
+        target_metric = "Median income (dollars)"
+    
+    data = []
     for col_idx, cell_val in enumerate(header_row):
-        if pd.isna(cell_val):
-            continue
-        s = str(cell_val)
-        if ("Median income" in s) or ("Mean income" in s):
-            # Metro Division case: take text after ';' if present, else the left part
-            city_name = s.split('!!')[0].split(';')[-1].strip()
-
-            # Prefer the 'Households' row (or 'All households') for a consistent statistic
+        if pd.isna(cell_val): continue
+        if target_metric in str(cell_val) and "!!Estimate" in str(cell_val):
+            city_name = str(cell_val).split('!!')[0].strip()
+            
+            # Find the "All households" or "Total" row
             val = np.nan
-            for row_idx in range(1, min(200, len(df))):
+            for row_idx in range(1, min(10, len(df))):
                 label = str(df.iloc[row_idx, 0])
-                lbl = clean_label(label).lower()
-                if 'household' in lbl or 'all households' in lbl or 'total' in lbl:
+                if "Households" in label or "Households" in clean_label(label):
                     val = clean_value(df.iloc[row_idx, col_idx])
-                    if not pd.isna(val):
-                        break
-
-            # FalIncomelback: first numeric value in column
-            if pd.isna(val):
-                for row_idx in range(1, min(200, len(df))):
-                    cand = clean_value(df.iloc[row_idx, col_idx])
-                    if not pd.isna(cand):
-                        val = cand
-                        break
-
-            if 'Median income' in s:
-                med_data[city_name] = val
-            elif 'Mean income' in s:
-                mean_data[city_name] = val
-
-    # Build initial rows preferring medians, then ACS means
-    all_names = set(list(med_data.keys()) + list(mean_data.keys()))
-    rows = []
-    for name in sorted(all_names):
-        if name in med_data and not pd.isna(med_data[name]):
-            rows.append({'NAME': name, 'Median Income': med_data[name]})
-        elif name in mean_data and not pd.isna(mean_data[name]):
-            rows.append({'NAME': name, 'Median Income': mean_data[name]})
-        else:
-            rows.append({'NAME': name, 'Median Income': np.nan})
-
-    out = pd.DataFrame(rows)
-
-    # If some MSAs are still missing, try to fill from data/processed/finalized.csv
-    fallback_path = os.path.join('data', 'processed', 'finalized.csv')
-    if os.path.exists(fallback_path):
-        try:
-            fin = pd.read_csv(fallback_path, dtype=str)
-            if 'NAME' in fin.columns and 'Mean Income' in fin.columns:
-                fin['Mean Income'] = fin['Mean Income'].apply(clean_value)
-                missing_mask = out['Median Income'].isna()
-                for idx in out[missing_mask].index:
-                    name = out.at[idx, 'NAME']
-                    matched = fin[fin['NAME'] == name]
-                    if not matched.empty:
-                        mval = matched['Mean Income'].iloc[0]
-                        if not pd.isna(mval):
-                            out.at[idx, 'Median Income'] = mval
-        except Exception as e:
-            print(f"  Warning: failed to read fallback finalized file: {e}")
-
-    if out.empty:
-        print("  Warning: No income metrics found in file.")
-        return out
-
-    # Collapse duplicate Metro Area entries (e.g., Metro Divisions) using median
-    # aggregation for numeric values and keep one row per NAME.
-    agg = out.groupby('NAME', as_index=False).agg({'Median Income': 'median'})
-
-    print(f"  Found {len(agg)} unique income entries.")
-    return agg
+                    break
+            data.append({'NAME': city_name, 'Median Income': val})
+            
+    return pd.DataFrame(data)
 
 # ==========================================
 # MAIN EXECUTION
@@ -234,54 +169,6 @@ merged_df = df_pop.copy()
 merged_df = merged_df.sort_values(by='Total Population', ascending=False).head(20)
 
 print(f"Top 5 MSAs by Population: {merged_df['NAME'].head(5).tolist()}")
-
-# -- Ensure median income is available for top MSAs --
-# If some top MSAs are missing from the ACS income extraction, try to
-# fill them from the processed/finalized dataset (Mean Income) as a fallback.
-missing_for_top = set(merged_df['NAME']) - set(df_inc['NAME'])
-# Also include names present but with NaN Median Income
-nan_mask = df_inc['Median Income'].isna() if 'Median Income' in df_inc.columns else pd.Series(dtype=bool)
-nan_names = set(df_inc.loc[nan_mask, 'NAME'].tolist())
-need_fill = set(merged_df['NAME']) & (missing_for_top | nan_names)
-if need_fill:
-    print(f"Filling missing median income for {len(need_fill)} MSAs from finalized.csv: {sorted(need_fill)}")
-    fin_path = os.path.join('data', 'processed', 'finalized.csv')
-    if os.path.exists(fin_path):
-        fin = pd.read_csv(fin_path, dtype=str)
-        if 'NAME' in fin.columns and 'Mean Income' in fin.columns:
-            fin['Mean Income'] = fin['Mean Income'].apply(clean_value)
-            for name in need_fill:
-                # If name already exists in df_inc but the value is NaN, update it
-                lookup_name = name.replace(' Metro Area','').strip()
-                idxs = df_inc.index[df_inc['NAME'] == name].tolist() if name in df_inc['NAME'].values else []
-                if idxs:
-                    for idx in idxs:
-                        if pd.isna(df_inc.at[idx, 'Median Income']):
-                            matched = fin[fin['NAME'] == lookup_name]
-                            if matched.empty:
-                                try:
-                                    matched = fin[fin['NAME'].str.contains(re.escape(lookup_name), na=False)]
-                                except Exception:
-                                    matched = fin[fin['NAME'].str.contains(lookup_name, na=False)]
-                            if not matched.empty:
-                                df_inc.at[idx, 'Median Income'] = matched['Mean Income'].iloc[0]
-                else:
-                    matched = fin[fin['NAME'] == lookup_name]
-                    if matched.empty:
-                        try:
-                            matched = fin[fin['NAME'].str.contains(re.escape(lookup_name), na=False)]
-                        except Exception:
-                            matched = fin[fin['NAME'].str.contains(lookup_name, na=False)]
-                    if not matched.empty:
-                        df_inc = pd.concat(
-                            [df_inc, pd.DataFrame([{
-                                'NAME': name,
-                                'Median Income': matched['Mean Income'].iloc[0]
-                            }])],
-                            ignore_index=True
-                        )
-    else:
-        print("  Warning: finalized.csv not found; cannot fill missing incomes.")
 
 merged_df = merged_df.merge(df_inc, on='NAME', how='left')
 
