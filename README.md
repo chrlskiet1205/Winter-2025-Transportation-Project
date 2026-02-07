@@ -23,7 +23,7 @@ This project uses publicly available datasets from the United States Census Bure
 - [Table B01003: Total Population - Census Bureau Table](https://data.census.gov/table/ACSDT1Y2024.B01003?q=B01003&g=010XX00US$3140000&moe=false)
 - [Table B08301: Means of Transportation to Work](https://data.census.gov/table/ACSDT1Y2024.B08301?q=B08301:+Means+of+Transportation+to+Work&moe=false)
 - [Table B08201: Household Size by Vehicles Available](https://data.census.gov/table/ACSDT1Y2024.B08201?q=b08201&g=010XX00US$31000M1&moe=false)
-- [Table S1902: Mean Income in the Past 12 Months (in 2024 Inflation-Adjusted Dollars)](https://data.census.gov/table/ACSST1Y2024.S1902?q=income&g=010XX00US$31000M1&moe=false)
+- [Table S1903: Median Income in the Past 12 Months (in 2024 Inflation-Adjusted Dollars)](https://data.census.gov/table/ACSST1Y2024.S1903?q=S1903&g=010XX00US$31000M1&moe=false)
 
 ### 2. Federal Transit Administration
 - [National Transit Dataset - Service (by Mode and Time Period)](https://catalog.data.gov/dataset/service-flat-file)
@@ -35,7 +35,7 @@ This project uses publicly available datasets from the United States Census Bure
 ## IV. Unit of Analysis
 
 ## V. Methodology
-### Transit Need Index
+### 1. Transit Need Index
 Transit need was approximated using the following variables:
 
 - Percentage of households with no vehicle available
@@ -45,8 +45,8 @@ Transit need was approximated using the following variables:
 Each variable was standardized using a **robust z-score** based on the median and interquartile range (IQR).
 The final Transit Need Index is calculated as the unweighted mean of the standardized variables:
 
-$$Transit Need Index = (Z_(noVehicle) + Z_(transitCommute) − Z_(income)) / 3$$
-### Transit Supply Index
+$$Transit Need Index = (Z_{noVehicle} + Z_{transitCommute} − Z_{income}) / 3$$
+### 2. Transit Supply Index
 Transit supply was measured using National Transit Database service metrics:
 
 - Vehicle Revenue Miles (VRM) per capita
@@ -55,7 +55,7 @@ Transit supply was measured using National Transit Database service metrics:
 
 All metrics were aggregated from the transit agency level to the MSA level and normalized by population.
 Standardization followed the same robust z-score approach used for the Transit Need Index.
-### Transit Need–Supply Gap
+### 3. Transit Need–Supply Gap
 
 The Transit Gap metric is defined as the difference between the Transit Need Index and the Transit Supply Index:
 
