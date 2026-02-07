@@ -332,5 +332,5 @@ This project uses publicly available datasets from the United States Census Bure
 - [Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
 
 ## IX. Authors
-Dung Tri Nguyen (Dune Nguyen)
+Dung Tri Nguyen (Dune Nguyen)  
 Minh Kiet Tran (Charles Tran)  
