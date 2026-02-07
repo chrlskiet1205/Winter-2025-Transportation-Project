@@ -281,11 +281,11 @@ Comparing New York (Highest Gap) with Minneapolis (Median Gap):
 ![Top vs. Median](charts/NY&MI.png)
 ***Figure 7:** New York vs. Minneapolis*
 
-#### 4.3. **The Negative Gap Drivers (San Diego)** 
+#### 4.3. **The Negative Gap Drivers (San Diego & San Francisco)** 
 Comparing San Diego & San Francisco (Lowest Gap) with Minneapolis (Median Gap):
 - San Diego’s and San Francisco's negative gap is driven primarily by Median Income.
 - While San Diego and San Francisco have comparable supply metrics to the median, their higher household income significantly reduces their calculated "Need" score.
-- Insight: This highlights a limitation of the model—in wealthier regions, transit need is not driven by lack of vehicles (captivity) but potentially by choice (lifestyle/traffic), which this socioeconomic "Need Index" does not fully capture.
+- This highlights a limitation of the model—in wealthier regions, transit need is not driven by lack of vehicles (captivity) but potentially by choice (lifestyle/traffic), which this socioeconomic "Need Index" does not fully capture.
 
 ![Bottom vs. Median](charts/SD,SF&MI.png)
 ***Figure 8**: San Diego & San Francisco vs. Minneapolis*
