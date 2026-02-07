@@ -68,6 +68,17 @@ Positive values indicate MSAs where transit need exceeds supply,
 while negative values indicate relatively higher levels of transit provision.
 
 ## VI. Key Findings
+For detailed CSV database: ![Database](data/processed/finalized.csv)
+### 1. Overall findings
+![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
+- Overall, 9 out of 20 Top 20 U.S. MSAs require urgent transportation upgrades to match their demands. (MSAs marked in green)
+- 11 out of 20 Top 20 U.S. MSAs have satisfied their demands in public transportation.
+![Top 5 Highest Transit Gap](charts/Need&Supply_5HighestGap.png)
+- New York–Newark–Jersey City, NY-NJ; Tampa–St. Petersburg–Clearwater, FL; Detroit–Warren–Dearborn, MI; Chicago–Naperville–Elgin, IL-IN; Philadelphia–Camden–Wilmington, PA-NJ-DE-MD are the MSAs with the highest Transit Gap (urgent)
+![Top 5 Lowest Transit Gap](charts/Need&Supply_5LowestGap.png)
+- Atlanta–Sandy Springs–Roswell, GA; Los Angeles–Long Beach–Anaheim, CA; Dallas–Fort Worth–Arlington, TX; San Francisco–Oakland–Fremont, CA; San Diego–Chula Vista–Carlsbad, CA are the MSAs with the lowest transit gap (oversupplied public transit).
+![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
+- Miami–Fort Lauderdale–West Palm Beach, FL; Houston–Pasadena–The Woodlands, TX; Minneapolis–St. Paul–Bloomington, MN-WI; Seattle–Tacoma–Bellevue, WA; Denver–Aurora–Centennial, CO are MSAs whose public transit supplies match their demands out of top 20 MSAs. (since they are top 5 MSAs with Median Transit Gap)
 
 ## VII. Limitations
 - Census data for Urbanized Area is available, however, the data was last updated in 2020, plus the project's scope is MSAs (Need to edit more)
