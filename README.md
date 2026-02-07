@@ -33,42 +33,134 @@ This project uses publicly available datasets from the United States Census Bure
 - [Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
   
 ## IV. Unit of Analysis
+The primary unit of analysis is the **Metropolitan Statistical Area (MSA)**.
+This study focuses on the **20 largest U.S. MSAs by total population**.
+
+Transit *need* indicators are calculated directly at the MSA level using
+American Community Survey (ACS) data.
+
+Transit *supply* indicators are derived from the National Transit Database (NTD),
+which reports service statistics at the **Urbanized Area (UZA)** level.
+To reconcile this mismatch, UZA-level transit service metrics were **rescaled**
+to the MSA level using population proportions.
+
+Population normalization for transit supply metrics uses the
+**Service Area Population (`service_area_pop`)** reported in the NTD,
+rather than total metropolitan population, to more accurately reflect
+the population served by each transit agency.
 
 ## V. Methodology
-### 1. Transit Need Index
-Transit need was approximated using the following variables:
 
-- Percentage of households with no vehicle available
-- Percentage of workers commuting via public transit
+### 0. Data Processing and Harmonization
+
+To ensure consistency across datasets, several preprocessing steps were applied to both transit service and census data.
+
+#### 0.1 Census Data (Need)
+
+Transit need indicators were derived from the **2024 American Community Survey (ACS) 1-year estimates**, using **Subject Tables**.
+
+Data were filtered to include:
+- All **Metropolitan Statistical Areas (MSAs)** within the United States and Puerto Rico.
+
+Key preprocessing steps included:
+- Sort Top 20 MSAs by total population for analysis.
+- **Percentage of households with no vehicle available** was calculated as:
+
+$$
+\text{Pct No Vehicle} = \frac{\text{Households with No Vehicle}}{\text{Total Households}}
+$$
+
+using raw ACS data from: [acs_vehicle_ownership_2024.csv](data/raw/census/acs_vehicle_ownership_2024.csv) and stored in: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv)
+- **Public transit commute share** (unstandardized) was obtained from the variable  
+**Public Transit Share** in: [finalized.csv](data/processed/finalized.csv) and stored in: [transit_need_index.csv](data/processed/transit_need_index.csv)
+- **Mean household income** was sourced directly from ACS income subject tables.
+
+#### 0.2 Transit Service Data (Supply)
+
+Transit service data from the National Transit Database (NTD) were filtered to include only:
+
+- **Report Year:** 2024  
+- **Time Period:** Annual Total  
+- **Type of Service:** Directly Operated (DO) public transportation  
+
+The following modes were excluded to focus on fixed-route and high-capacity transit services:
+- **Vanpool**
+- **Demand Response**
+
+Transit agencies were first aggregated at the **Urbanized Area (UZA)** level.
+
+Because transit service metrics are reported at the UZA level while transit need indicators are reported at the Metropolitan Statistical Area (MSA) level, UZA-level service metrics were rescaled to the MSA level using population-based weighting.
+
+For each MSA, transit supply metrics were estimated as the population-weighted sum of overlapping UZAs:
+
+$$
+S_{MSA} = \sum_{u \in MSA} S_u \times \frac{P_{u \cap MSA}}{P_u}
+$$
+
+where:
+- $S_u$ is the UZA-level transit service metric (VRM or VRH),
+- $P_u$ is the total population of UZA $u$,
+- $P_{u \cap MSA}$ is the population of UZA $u$ within the MSA boundary,
+- $S_{MSA}$ is the estimated transit service for the MSA.
+
+Per-capita transit supply was then calculated using the NTD-reported  
+**Service Area Population (`service_area_pop`)**.
+
+Additional preprocessing steps included:
+- Manual harmonization of **four-digit UZA (UACE) codes** for the Boston and Atlanta regions to match records in the raw NTD service dataset.
+- Exporting the cleaned transit service dataset to: [transit_supply.csv](data/cleaned-unmerged/transit_supply.csv)
+---
+
+### 1. Transit Need Index
+
+Transit need was approximated using three socioeconomic and travel-related indicators:
+
+- Percentage of households with no vehicle available  
+- Percentage of workers commuting via public transit  
 - Mean household income (inverted to reflect higher need at lower incomes)
 
 Each variable was standardized using a **robust z-score** based on the median and interquartile range (IQR).
-The final Transit Need Index is calculated as the unweighted mean of the standardized variables:
 
-$$ Transit Need Index = \frac{Z_{noVehicle} + Z_{transitCommute} − Z_{income}}{3}$$
+The final **Transit Need Index** was calculated as the unweighted mean of the standardized variables:
+
+$$
+\text{Transit Need Index}
+= \frac{Z_{\text{noVehicle}} + Z_{\text{transitCommute}} - Z_{\text{income}}}{3}
+$$
+
+---
+
 ### 2. Transit Supply Index
-Transit supply was measured using National Transit Database service metrics:
 
-- Vehicle Revenue Miles (VRM) per capita
-- Vehicle Revenue Hours (VHM) per capita
+Transit supply was measured using the following National Transit Database service metrics:
 
-All metrics were aggregated from the transit agency level to the MSA level and normalized by population.
-Standardization followed the same robust z-score approach used for the Transit Need Index.
-The final Transit Supply Index is calculated as the unweighted mean of the standardized variables:
+- **Vehicle Revenue Miles (VRM) per capita**
+- **Vehicle Revenue Hours (VRH) per capita**
 
-$$ Transit Supply Index = \frac{Z_{VRM per capita} + Z_{VRH per capita}}{2}$$
+After rescaling UZA-level metrics to the MSA level, all variables were standardized using the same robust z-score approach applied to the Transit Need Index.
+
+The final **Transit Supply Index** was calculated as the unweighted mean of the standardized variables:
+
+$$
+\text{Transit Supply Index}
+= \frac{Z_{\text{VRM per capita}} + Z_{\text{VRH per capita}}}{2}
+$$
+
+---
 
 ### 3. Transit Need–Supply Gap
 
-The Transit Gap metric is defined as the difference between the Transit Need Index and the Transit Supply Index:
+The **Transit Gap** metric was defined as the difference between the Transit Need Index and the Transit Supply Index:
 
-$$ Transit Gap = Transit Need Index − Transit Supply Index $$
+$$
+\text{Transit Gap} = \text{Transit Need Index} - \text{Transit Supply Index}
+$$
 
-Positive values indicate MSAs where transit need exceeds supply,
+Positive values indicate MSAs where transit need exceeds transit supply,  
 while negative values indicate relatively higher levels of transit provision.
 
 ## VI. Key Findings
-_For all databases used to calculate standardized values and master database_ [Folder](data/processed)
+_For all databases used to calculate standardized values and finalized database [folder](data/processed)_
 ### 1. Overall findings
 ![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
 - Overall, 9 out of 20 Top 20 U.S. MSAs require urgent transportation upgrades to match their demands. (MSAs marked in green)
@@ -81,12 +173,24 @@ _For all databases used to calculate standardized values and master database_ [F
 - Miami–Fort Lauderdale–West Palm Beach, FL; Houston–Pasadena–The Woodlands, TX; Minneapolis–St. Paul–Bloomington, MN-WI; Seattle–Tacoma–Bellevue, WA; Denver–Aurora–Centennial, CO are MSAs whose public transit supplies match their demands out of top 20 MSAs. (since they are top 5 MSAs with Median Transit Gap)
 ![Heatmap](charts/Heatmap.png)
 - From the heatmap, it is evident that Scaled VRM and Scaled VRH are uniform across MSAs (no significant outliers)
-- New York dominants No Vehicle Percentage and Transit Commute Percentage
+- New York dominants No Vehicle Percentage and Transit Commute Percentage as it is the outliers
 - San Francisco-Oakland-Fremont, CA; Washington-Arlington-Alexandria, DC-VA-MD-WV; Boston-Cambridge-Newton, MA-NH are the most prominent MSAs in terms of Median Income
-### 2. 
+### 2. In-depth analysis
+- Comparing 
 
 ## VII. Limitations
-- Census data for Urbanized Area is available, however, the data was last updated in 2020, plus the project's scope is MSAs (Need to edit more)
+
+This study is subject to several data and methodological limitations.
+
+First, transit service metrics are reported by the National Transit Database at the **Urbanized Area (UZA)** level, while transit need indicators from the American Community Survey are reported at the **Metropolitan Statistical Area (MSA)** level. To reconcile this mismatch, UZA-level transit supply metrics were rescaled to the MSA level using population-based weighting. While this approach is commonly used in spatial analysis, it assumes that transit service is distributed proportionally to population within each UZA and does not capture intra-metropolitan variations in service intensity.
+
+Second, per-capita transit supply was calculated using the NTD-reported **Service Area Population**, which may differ from total MSA population counts. As a result, per-capita measures may not fully reflect differences in service coverage or accessibility across metropolitan regions.
+
+Third, although ACS data at the **Urbanized Area (UZA)** level exist, the most recent available UZA-level ACS estimates are from **2020**. Using these data would introduce a substantial temporal mismatch with the 2024 transit service data used in this study. As a result, UZA-level ACS datasets were not used, and transit need was evaluated at the MSA level instead.
+
+Finally, the constructed Transit Need Index and Transit Supply Index use **equal weighting** across all component variables. While this approach ensures transparency and interpretability, it does not account for potential differences in the relative importance of individual indicators, which could influence index values.
+
+These limitations should be considered when interpreting the results, and future research could address them by incorporating more recent small-area data, alternative weighting schemes, or longitudinal analysis.
 
 ## VIII. Authors
 Minh Kiet Tran (Charles Tran)  
