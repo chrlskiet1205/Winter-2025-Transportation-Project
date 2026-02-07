@@ -243,7 +243,7 @@ To understand the source of these gaps, we decompose the metric into its two con
 ![Top 5 Highest Transit Gap](charts/Need&Supply_5HighestGap.png)
 ***Figure 2:** Top 5 MSAs with Highest Transit Gap*
 
-#### A. High-Gap MSAs: The "Need-Driven" Deficit
+#### 2.1. High-Gap MSAs: The "Need-Driven" Deficit
 - **Observation:** In the top 5 highest-gap MSAs (e.g., **New York, Chicago, Philadelphia**), the disparity is driven almost entirely by the **Need Index (Green Bar)**.
 - **Key Insight:** New York–Newark–Jersey City (NY-NJ) is the most extreme example. Despite having a positive Supply Index (indicating above-average service), its Need Index is astronomically high (>2.5 standard deviations).
 - **Interpretation:** This suggests that for these dense, urbanized regions, even robust transit systems are struggling to keep pace with the extreme transit dependence of their populations. The "deficit" here is not a failure of supply, but a reflection of intense demand.
@@ -251,7 +251,7 @@ To understand the source of these gaps, we decompose the metric into its two con
 ![Top 5 Lowest Transit Gap](charts/Need&Supply_5LowestGap.png)
 ***Figure 3:** Top 5 MSAs with Lowest Transit Gap*
 
-#### B. Low-Gap MSAs: The "Affluence-Driven" Surplus
+#### 2.2. Low-Gap MSAs: The "Affluence-Driven" Surplus
 - **Observation:** The MSAs with the lowest (most negative) gaps, such as **San Diego** and **Dallas**, display a distinct pattern: their **Need Index (Green Bar) is deeply negative**.
 - **Key Insight:** San Diego–Chula Vista–Carlsbad (CA) has a Need Index of roughly -0.4.
 - **Interpretation:** A negative Need Index implies high median income and high vehicle ownership. The "surplus" (negative gap) in these Sunbelt cities is not caused by having "too much" transit (oversupply), but rather by having a population that is structurally less dependent on it. Their transit infrastructure, while moderate, exceeds the relatively low socioeconomic demand.
@@ -259,7 +259,7 @@ To understand the source of these gaps, we decompose the metric into its two con
 ![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
 ***Figure 4:** 5 MSAs in the median range*
 
-#### C. Median-Gap MSAs: The Representative Baseline
+#### 2.3. Median-Gap MSAs: The Representative Baseline
 - **Observation:** The MSAs in the median range (e.g., **Minneapolis, Seattle**) show minimal divergence between need and supply.
 - **Key Insight: Minneapolis–St. Paul–Bloomington** is the most statistically representative case. Its Need Index and Supply Index bars are both negligible (hovering near 0.0).
 - **Interpretation:** Unlike the outliers, Minneapolis represents the cohort average. It does not suffer from the extreme inequality of New York, nor does it possess the low-dependency characteristics of San Diego. It is a "balanced" system where service provision closely mirrors the socioeconomic profile of its residents.
@@ -283,7 +283,7 @@ The heatmap further clarifies the specific variables driving these indices:
 ![Top vs. Bottom](charts/NY&SD.png)
 ***Figure 6:** New York vs. San Diego*
 
-#### A. **The Extremes (New York vs. San Diego)**
+#### 4.1. **The Extremes (New York vs. San Diego)**
 Comparing the highest-gap MSA (New York) with the lowest-gap MSA (San Diego):
 - **Visual Contrast:** As illustrated in the radar chart, New York–Newark–Jersey City (blue line) completely dominates San Diego–Chula Vista–Carlsbad (red line) across all transit-dependency metrics. New York exhibits vastly higher _Transit Commute Percentage_ and _No Vehicle Percentage_, alongside higher per-capita supply (VRM/VRH).
 - **The Income Inversion:** The only metric where San Diego surpasses New York is **Median Income**. This structural difference highlights the divergence in transit function: New York’s system supports a population with high "captivity" (low car ownership), whereas San Diego’s system operates in an environment of high vehicle access and affluence, resulting in a negative "Need" index despite moderate supply.
@@ -291,7 +291,7 @@ Comparing the highest-gap MSA (New York) with the lowest-gap MSA (San Diego):
 ![Top vs. Median](charts/NY&MI.png)
 ***Figure 7:** New York vs. Minneapolis*
 
-#### B. **The Outlier vs. The Median** **(New York vs. Minneapolis)** 
+#### 4.2. **The Outlier vs. The Median** **(New York vs. Minneapolis)** 
 Comparing New York (Highest Gap) with Minneapolis–St. Paul (Median Gap):
 - As shown in the radar charts, New York's polygon completely envelops Minneapolis's across need-based metrics.
 - **The "Representative" MSA:** Minneapolis–St. Paul acts as the statistical baseline for this cohort. Its radar chart forms a nearly perfect symmetrical pentagon, and its Z-scores across all five metrics are effectively zero. This indicates that Minneapolis represents the **average profile** of a top-20 U.S. MSA: balanced deviations between supply and need.
@@ -299,7 +299,7 @@ Comparing New York (Highest Gap) with Minneapolis–St. Paul (Median Gap):
 ![Bottom vs. Median](charts/SD&MI.png)
 *Figure 8: San Diego vs. Minneapolis*
 
-#### C. **The Negative Gap Drivers (San Diego)** 
+#### 4.3. **The Negative Gap Drivers (San Diego)** 
 Comparing San Diego (Lowest Gap) with Minneapolis (Median Gap):
 - San Diego’s negative gap is driven primarily by Median Income.
 - While San Diego has comparable supply metrics to the median, its higher household income significantly reduces its calculated "Need" score.
@@ -313,49 +313,6 @@ Three distinct typologies of metropolitan transit systems emerge from the data:
 - **Need-Dominant Systems (e.g., New York, Chicago):** These regions face a **"Density Dilemma."** They possess the highest levels of transit supply in the nation, yet they still exhibit the largest service gaps. This paradox occurs because their populations are structurally dependent on transit (low car ownership, high ridership) to a degree that outpaces even extensive infrastructure. For these MSAs, "closing the gap" requires not just maintaining current service, but exponentially increasing capacity to meet non-linear demand.
 - **Affluence-Dominant Systems (e.g., San Diego, Dallas):** These regions exhibit a statistical "surplus" of transit, but this is a function of demographics rather than infrastructure. With high median incomes and near-universal vehicle access, their calculated "Need" is low. The challenge in these Sunbelt MSAs is not necessarily satisfying basic mobility needs, but rather **inducing demand**—shifting discretionary travelers from private vehicles to public transit to achieve sustainability goals.
 - **Balanced / Representative Systems (e.g., Minneapolis, Denver):** These MSAs represent the statistical "mean" of the top 20 cohort. Their service levels are commensurate with their socioeconomic profiles, suggesting a stable equilibrium. However, this equilibrium may also indicate a "middle-income trap," where transit service is adequate for the current user base but insufficient to catalyze a shift away from car dependency.
-
-### 1. Overall findings
-![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
-- Overall, 9 out of 20 Top 20 U.S. MSAs require urgent transportation upgrades to match their demands. (MSAs marked in green)
-- 11 out of 20 Top 20 U.S. MSAs have satisfied their demands in public transportation.
-
-![Top 5 Highest Transit Gap](charts/Need&Supply_5HighestGap.png)
-- New York–Newark–Jersey City, NY-NJ; Tampa–St. Petersburg–Clearwater, FL; Detroit–Warren–Dearborn, MI; Chicago–Naperville–Elgin, IL-IN; Philadelphia–Camden–Wilmington, PA-NJ-DE-MD are the MSAs with the highest Transit Gap (urgent)
-
-![Top 5 Lowest Transit Gap](charts/Need&Supply_5LowestGap.png)
-- Atlanta–Sandy Springs–Roswell, GA; Los Angeles–Long Beach–Anaheim, CA; Dallas–Fort Worth–Arlington, TX; San Francisco–Oakland–Fremont, CA; San Diego–Chula Vista–Carlsbad, CA are the MSAs with the lowest transit gap (oversupplied public transit).
-
-![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
-- Miami–Fort Lauderdale–West Palm Beach, FL; Houston–Pasadena–The Woodlands, TX; Minneapolis–St. Paul–Bloomington, MN-WI; Seattle–Tacoma–Bellevue, WA; Denver–Aurora–Centennial, CO are MSAs whose public transit supplies match their demands out of top 20 MSAs. (since they are top 5 MSAs with Median Transit Gap)
-
-![Heatmap](charts/Heatmap.png)
-- From the heatmap, it is evident that Scaled VRM and Scaled VRH are uniform across MSAs (no significant outliers)
-- New York dominants No Vehicle Percentage and Transit Commute Percentage as it is the outliers
-- San Francisco-Oakland-Fremont, CA; Washington-Arlington-Alexandria, DC-VA-MD-WV; Boston-Cambridge-Newton, MA-NH are the most prominent MSAs in terms of Median Income
-
----
-### 2. In-depth analysis
-![Top vs. Bottom](charts/NY&SD.png)
-Comparing the most undersupplied, "top of the table" MSA (New York–Newark–Jersey City, NY-NJ), with the most oversupplied, "bottom of the table" MSA (San Diego–Chula Vista–Carlsbad, CA):
-- New York–Newark–Jersey City overpowers San Diego–Chula Vista–Carlsbad in terms of Transit Commute Percentage, No Vehicle Percentage; also, VRH and VRM per capita is higher in New York–Newark–Jersey City
-- San Diego–Chula Vista–Carlsbad has higher median income compared to - New York–Newark–Jersey City, and much lower public transit ridership (evident in VRM and VRH per capita metrics)
-
-![Top vs. Median](charts/NY&MI.png)
-Comparing the most undersupplied, "top of the table" MSA (New York–Newark–Jersey City, NY-NJ), with the median-standing MSA whose supply matches the demand (Minneapolis–St. Paul–Bloomington, MN-WI):
-- New York–Newark–Jersey City still overpowers Minneapolis–St. Paul–Bloomington in terms of Transit Commute Percentage, No Vehicle Percentage; also, VRH and VRM per capita is higher in New York–Newark–Jersey City
-- Minneapolis–St. Paul–Bloomington's radar chart shape is almost a perfect pentagon, suggesting that all metrics are equal (need revision)
-
-![Bottom vs. Median](charts/SD&MI.png)
-Comparing the most oversupplied, "bottom of the table" MSA (San Diego–Chula Vista–Carlsbad, CA), with the "median-standing MSA" "whose supply matches the demand" (Minneapolis–St. Paul–Bloomington, MN-WI):
-- San Diego–Chula Vista–Carlsbad has higher median income compared to Minneapolis–St. Paul–Bloomington
-- Minneapolis–St. Paul–Bloomington has lower vehicle ownership compared to  San Diego–Chula Vista–Carlsbad, leads to more public transit dependency
-- Though, the differences are not as significant as New York–Newark–Jersey City to Minneapolis–St. Paul–Bloomington
----
-### 3. Conclusion
-Based on the pattern of the 5 metrics discussed above, we can conclude that:
-- MSAs with high transit gap often have high Transit Commute Percentage, No Vehicle Percentage, high public transport ridership
-- MSAs with low transit gap (oversupplied) often have high vehicle ownership, high median income
-- MSAs with median transit gap (adequate) often have almost even index across 5 metrics (needs more explaination)
 
 ## VII. Limitations
 
