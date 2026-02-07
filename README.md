@@ -226,7 +226,6 @@ while negative values indicate relatively higher levels of transit provision.
 
 _For all databases used to calculate standardized values and finalized database [folder](data/processed)_
 
----
 ### 1. Macroscopic Analysis of Transit Gaps
 ![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
 ***Figure 1:** Transit Gap of Top 20 U.S. MSAs*
@@ -240,29 +239,29 @@ _For all databases used to calculate standardized values and finalized database 
 ### 2. Component Analysis: Drivers of the Gap
 To understand the source of these gaps, we decompose the metric into its two constituent indices: **Transit Need** (Green) and **Transit Supply** (Red).
 
-![Top 5 Highest Transit Gap](charts/Need&Supply_5HighestGap.png)
-***Figure 2:** Top 5 MSAs with Highest Transit Gap*
-
 #### 2.1. High-Gap MSAs: The "Need-Driven" Deficit
 - **Observation:** In the top 5 highest-gap MSAs (e.g., **New York, Chicago, Philadelphia**), the disparity is driven almost entirely by the **Need Index (Green Bar)**.
 - **Key Insight:** New York–Newark–Jersey City (NY-NJ) is the most extreme example. Despite having a positive Supply Index (indicating above-average service), its Need Index is astronomically high (>2.5 standard deviations).
 - **Interpretation:** This suggests that for these dense, urbanized regions, even robust transit systems are struggling to keep pace with the extreme transit dependence of their populations. The "deficit" here is not a failure of supply, but a reflection of intense demand.
 
-![Top 5 Lowest Transit Gap](charts/Need&Supply_5LowestGap.png)
-***Figure 3:** Top 5 MSAs with Lowest Transit Gap*
+![Top 5 Highest Transit Gap](charts/Need&Supply_5HighestGap.png)
+***Figure 2:** Top 5 MSAs with Highest Transit Gap*
 
 #### 2.2. Low-Gap MSAs: The "Affluence-Driven" Surplus
 - **Observation:** The MSAs with the lowest (most negative) gaps, such as **San Diego** and **Dallas**, display a distinct pattern: their **Need Index (Green Bar) is deeply negative**.
 - **Key Insight:** San Diego–Chula Vista–Carlsbad (CA) has a Need Index of roughly -0.4.
 - **Interpretation:** A negative Need Index implies high median income and high vehicle ownership. The "surplus" (negative gap) in these Sunbelt cities is not caused by having "too much" transit (oversupply), but rather by having a population that is structurally less dependent on it. Their transit infrastructure, while moderate, exceeds the relatively low socioeconomic demand.
 
-![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
-***Figure 4:** 5 MSAs in the median range*
+![Top 5 Lowest Transit Gap](charts/Need&Supply_5LowestGap.png)
+***Figure 3:** Top 5 MSAs with Lowest Transit Gap*
 
 #### 2.3. Median-Gap MSAs: The Representative Baseline
 - **Observation:** The MSAs in the median range (e.g., **Minneapolis, Seattle**) show minimal divergence between need and supply.
 - **Key Insight: Minneapolis–St. Paul–Bloomington** is the most statistically representative case. Its Need Index and Supply Index bars are both negligible (hovering near 0.0).
 - **Interpretation:** Unlike the outliers, Minneapolis represents the cohort average. It does not suffer from the extreme inequality of New York, nor does it possess the low-dependency characteristics of San Diego. It is a "balanced" system where service provision closely mirrors the socioeconomic profile of its residents.
+
+![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
+***Figure 4:** 5 MSAs in the median range*
 
 ---
 
@@ -279,31 +278,30 @@ The heatmap further clarifies the specific variables driving these indices:
 ---
 
 ### 4. Comparative Case Studies
-
-![Top vs. Bottom](charts/NY&SD.png)
-***Figure 6:** New York vs. San Diego*
-
 #### 4.1. **The Extremes (New York vs. San Diego)**
 Comparing the highest-gap MSA (New York) with the lowest-gap MSA (San Diego):
 - **Visual Contrast:** As illustrated in the radar chart, New York–Newark–Jersey City (blue line) completely dominates San Diego–Chula Vista–Carlsbad (red line) across all transit-dependency metrics. New York exhibits vastly higher _Transit Commute Percentage_ and _No Vehicle Percentage_, alongside higher per-capita supply (VRM/VRH).
 - **The Income Inversion:** The only metric where San Diego surpasses New York is **Median Income**. This structural difference highlights the divergence in transit function: New York’s system supports a population with high "captivity" (low car ownership), whereas San Diego’s system operates in an environment of high vehicle access and affluence, resulting in a negative "Need" index despite moderate supply.
 
-![Top vs. Median](charts/NY&MI.png)
-***Figure 7:** New York vs. Minneapolis*
+![Top vs. Bottom](charts/NY&SD.png)
+***Figure 6:** New York vs. San Diego*
 
 #### 4.2. **The Outlier vs. The Median** **(New York vs. Minneapolis)** 
 Comparing New York (Highest Gap) with Minneapolis–St. Paul (Median Gap):
 - As shown in the radar charts, New York's polygon completely envelops Minneapolis's across need-based metrics.
 - **The "Representative" MSA:** Minneapolis–St. Paul acts as the statistical baseline for this cohort. Its radar chart forms a nearly perfect symmetrical pentagon, and its Z-scores across all five metrics are effectively zero. This indicates that Minneapolis represents the **average profile** of a top-20 U.S. MSA: balanced deviations between supply and need.
 
-![Bottom vs. Median](charts/SD&MI.png)
-*Figure 8: San Diego vs. Minneapolis*
+![Top vs. Median](charts/NY&MI.png)
+***Figure 7:** New York vs. Minneapolis*
 
 #### 4.3. **The Negative Gap Drivers (San Diego)** 
 Comparing San Diego (Lowest Gap) with Minneapolis (Median Gap):
 - San Diego’s negative gap is driven primarily by Median Income.
 - While San Diego has comparable supply metrics to the median, its higher household income significantly reduces its calculated "Need" score.
 - Insight: This highlights a limitation of the model—in wealthier regions, transit need is not driven by lack of vehicles (captivity) but potentially by choice (lifestyle/traffic), which this socioeconomic "Need Index" does not fully capture.
+
+![Bottom vs. Median](charts/SD&MI.png)
+*Figure 8: San Diego vs. Minneapolis*
 
 ---
 
