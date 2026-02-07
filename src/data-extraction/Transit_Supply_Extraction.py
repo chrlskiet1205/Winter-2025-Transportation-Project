@@ -25,7 +25,7 @@ filtered_service_df = annual_2024_service_df[
     annual_2024_service_df['UACE_Code'].isin(map_df_uacecode_only)
 ]
 
-#Sum VRM, VRH, UPT of all agencies in UZAs based on UACE Code
+#Sum VRM, VRH of all agencies in UZAs based on UACE Code
 aggregated_df = filtered_service_df.groupby('UACE_Code', as_index=False).agg({
     'UZA_Name': 'first',
     'UACE_Code': 'first',
