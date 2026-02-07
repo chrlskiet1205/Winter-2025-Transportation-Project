@@ -126,8 +126,16 @@ $$
 $$
 
 using raw ACS data from: [acs_vehicle_ownership_2024.csv](data/raw/census/acs_vehicle_ownership_2024.csv) and stored in: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv)
-- **Public transit commute share** (unstandardized) was obtained from the variable  
-**Public Transit Share** in: [finalized.csv](data/processed/finalized.csv) and stored in: [transit_need_index.csv](data/processed/transit_need_index.csv)
+- **Public transit share** was calculated as:
+
+$$
+\text{Public Transit Share}
+= \frac{\text{Transit Commuters}}{\text{Total Workers}}
+$$
+
+where both **Transit Commuters** and **Total Workers** were obtained from: [acs_means_of_transport_to_work_2024.csv](data/raw/census/acs_means_of_transport_to_work_2024.csv)
+The unstandardized transit commute share was exported to: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv) and later merged into the finalized dataset used for index construction.
+
 - **Median household income** was sourced directly from ACS income subject tables.
 
 #### 0.2 Transit Service Data (Supply)
@@ -215,8 +223,8 @@ Positive values indicate MSAs where transit need exceeds transit supply,
 while negative values indicate relatively higher levels of transit provision.
 
 ## VI. Key Findings
+
 _For all databases used to calculate standardized values and finalized database [folder](data/processed)_
----
 ### 1. Overall findings
 ![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
 - Overall, 9 out of 20 Top 20 U.S. MSAs require urgent transportation upgrades to match their demands. (MSAs marked in green)
