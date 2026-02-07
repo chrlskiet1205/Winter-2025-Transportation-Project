@@ -68,7 +68,7 @@ Positive values indicate MSAs where transit need exceeds supply,
 while negative values indicate relatively higher levels of transit provision.
 
 ## VI. Key Findings
-For detailed CSV database: ![Database](data/processed/finalized.csv)
+_For all databases used to calculate standardized values and master database_ [Folder](data/processed)
 ### 1. Overall findings
 ![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
 - Overall, 9 out of 20 Top 20 U.S. MSAs require urgent transportation upgrades to match their demands. (MSAs marked in green)
@@ -79,6 +79,11 @@ For detailed CSV database: ![Database](data/processed/finalized.csv)
 - Atlanta–Sandy Springs–Roswell, GA; Los Angeles–Long Beach–Anaheim, CA; Dallas–Fort Worth–Arlington, TX; San Francisco–Oakland–Fremont, CA; San Diego–Chula Vista–Carlsbad, CA are the MSAs with the lowest transit gap (oversupplied public transit).
 ![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
 - Miami–Fort Lauderdale–West Palm Beach, FL; Houston–Pasadena–The Woodlands, TX; Minneapolis–St. Paul–Bloomington, MN-WI; Seattle–Tacoma–Bellevue, WA; Denver–Aurora–Centennial, CO are MSAs whose public transit supplies match their demands out of top 20 MSAs. (since they are top 5 MSAs with Median Transit Gap)
+![Heatmap](charts/Heatmap.png)
+- From the heatmap, it is evident that Scaled VRM and Scaled VRH are uniform across MSAs (no significant outliers)
+- New York dominants No Vehicle Percentage and Transit Commute Percentage
+- San Francisco-Oakland-Fremont, CA; Washington-Arlington-Alexandria, DC-VA-MD-WV; Boston-Cambridge-Newton, MA-NH are the most prominent MSAs in terms of Median Income
+### 2. 
 
 ## VII. Limitations
 - Census data for Urbanized Area is available, however, the data was last updated in 2020, plus the project's scope is MSAs (Need to edit more)
