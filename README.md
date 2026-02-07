@@ -8,19 +8,20 @@
 
 <hr>
 
-## I. Motivation & Background
+## I. Abstract
+This project presents a comparative analysis of public transit need and supply across the 20 largest U.S. Metropolitan Statistical Areas (MSAs). Transit need is assessed using socioeconomic indicators—median household income, vehicle availability, and the share of workers commuting by public transit—to construct a **Transit Need Index**. Transit service is measured through per-capita Vehicle Revenue Miles (VRM) and Vehicle Revenue Hours (VRH) from the National Transit Database, aggregated from Urbanized Areas (UZAs) to the MSA level to form a **Transit Supply Index**. Both indices are standardized using **robust z-scores** to reduce the influence of extreme values, such as those observed in the New York–Newark–Jersey City metropolitan area. The difference between these indices, defined as the **Transit Gap**, identifies MSAs where transit service does not fully align with population need. Results reveal three distinct typologies of metropolitan transit systems: (1) **Need-Dominant Systems** (e.g., New York, Chicago), where high population dependence exceeds even extensive transit provision; (2) **Affluence-Dominant Systems** (e.g., San Diego, Dallas), where high median incomes and widespread vehicle access result in a relative surplus of transit; and (3) **Balanced / Representative Systems** (e.g., Minneapolis, Denver), where service provision closely aligns with socioeconomic need. These findings indicate that strategies to address transit gaps must consider the underlying dependence and demographic characteristics of each metropolitan area.
+
+
+## II. Motivation & Background
 Public transportation plays a critical role in urban mobility in the United States, supporting billions of passenger trips each year and providing essential access to employment, education, and services—particularly for households without reliable access to private vehicles. Ensuring that transit service is aligned with underlying need remains an important challenge for large metropolitan regions.
 
 In practice, the distribution of public transit service across metropolitan areas does not always reflect socioeconomic indicators of transit dependence, such as income, vehicle availability, and commuting patterns. Comparing transit need and supply is further complicated by fragmented data structures: measures of transit demand are typically reported at the metropolitan level, while transit service metrics
 are reported at the urbanized area level. This project is motivated by the need for a transparent, data-driven framework to compare public transit need and supply across major U.S. metropolitan statistical areas.
 
-## II. Research Question
-Which of the 20 largest U.S. metropolitan statistical areas exhibit the largest gaps between public transit need and public transit supply?
-
   
 ## III. Unit of Analysis
-The primary unit of analysis is the **Metropolitan Statistical Area (MSA)**.
-This study focuses on the **20 largest U.S. MSAs by total population**.
+The primary unit of analysis is the **Metropolitan Statistical Area**.
+This project focuses on the **20 largest U.S. MSAs by total population**.
 
 Transit *need* indicators are calculated directly at the MSA level using
 American Community Survey (ACS) data.
@@ -37,72 +38,57 @@ the population served by each transit agency.
 
 ## IV. Variable Definitions and Rationale
 
-This study uses a set of socioeconomic and transit service indicators to quantify public transit **need** and **supply** across metropolitan areas. Each variable was selected to capture a distinct dimension of transit dependence or service provision.
+This project uses a set of socioeconomic and transit service indicators to quantify public transit **need** and **supply** across metropolitan areas. Each variable was selected to capture a distinct dimension of transit dependence or service provision.
 
 ### 1. Median Household Income
 
-**Definition:**  
-Median household income represents the median income of households within a metropolitan area, reported in inflation-adjusted dollars.
+**Definition:** Median household income represents the median income of households within a metropolitan area, reported in inflation-adjusted dollars.
 
-**Rationale:**  
-Income is a key determinant of transportation choice. Lower-income households are more likely to depend on public transit due to limited access to private vehicles and higher sensitivity to transportation costs. In the Transit Need Index, income is **inverted** so that lower income corresponds to higher transit need.
-
----
+**Rationale:** Income is a key determinant of transportation choice. Lower-income households are more likely to depend on public transit due to limited access to private vehicles and higher sensitivity to transportation costs. In the Transit Need Index, income is **inverted** so that lower income corresponds to higher transit need.
+<br>
 
 ### 2. Public Transit Commute Percentage
 
-**Definition:**  
-Public transit commute percentage represents the share of workers who commute to work using public transportation.
+**Definition:** Public transit commute percentage represents the share of workers who commute to work using public transportation.
 
-**Rationale:**  
-This variable directly reflects **existing reliance on transit** for daily mobility. Higher transit commute shares indicate greater dependence on transit infrastructure and a higher potential need for sustained or expanded service.
-
----
+**Rationale:** This variable directly reflects **existing reliance on transit** for daily mobility. Higher transit commute shares indicate greater dependence on transit infrastructure and a higher potential need for sustained or expanded service.
+<br>
 
 ### 3. Percentage of Households with No Vehicle Available
 
-**Definition:**  
-The percentage of households reporting no access to a private vehicle.
+**Definition:** The percentage of households reporting no access to a private vehicle.
 
-**Rationale:**  
-Households without vehicles are structurally dependent on alternative transportation modes. This indicator captures **transportation vulnerability** and unmet mobility needs, making it one of the strongest predictors of transit dependence.
-
----
+**Rationale:** Households without vehicles are structurally dependent on alternative transportation modes. This indicator captures **transportation vulnerability** and unmet mobility needs, making it one of the strongest predictors of transit dependence.
+<br>
 
 ### 4. Vehicle Revenue Miles (VRM) per Capita
 
-**Definition:**  
-Vehicle Revenue Miles (VRM) represent the total distance traveled by transit vehicles while in revenue service (i.e., when passengers are permitted to board).
+**Definition:** Vehicle Revenue Miles (VRM) represent the total distance traveled by transit vehicles while in revenue service (i.e., when passengers are permitted to board).
 
-**Why per capita:**  
-VRM is divided by population to account for differences in metropolitan size and to enable fair comparison across MSAs.
+**Why per capita?** VRM is divided by population to account for differences in metropolitan size and to enable fair comparison across MSAs.
 
-**Rationale:**  
-VRM per capita captures the **spatial availability and coverage** of transit service. Higher values indicate more extensive service relative to population, reflecting greater potential access to transit across the metropolitan area.
-
----
+**Rationale:** VRM per capita captures the **spatial availability and coverage** of transit service. Higher values indicate more extensive service relative to population, reflecting greater potential access to transit across the metropolitan area.
+<br>
 
 ### 5. Vehicle Revenue Hours (VRH) per Capita
 
-**Definition:**  
-Vehicle Revenue Hours (VRH) measure the total time transit vehicles spend in revenue service.
+**Definition:** Vehicle Revenue Hours (VRH) measure the total time transit vehicles spend in revenue service.
 
-**Why per capita:**  
-Normalizing VRH by population controls for metropolitan scale and allows comparison of service intensity across regions.
+**Why per capita?** Normalizing VRH by population controls for metropolitan scale and allows comparison of service intensity across regions.
 
-**Rationale:**  
-VRH per capita reflects **service frequency and operational intensity**, capturing how much transit service is supplied relative to population size.
-
----
+**Rationale:** VRH per capita reflects **service frequency and operational intensity**, capturing how much transit service is supplied relative to population size.
+<br>
 
 ### Summary
 
 Together, these variables capture complementary dimensions of public transit systems:
 
-- **Transit Supply:** VRM per capita, VRH per capita  
 - **Transit Need:** Income, vehicle availability, and commuting behavior  
+- **Transit Supply:** VRM per capita, VRH per capita  
 
-By combining these indicators into standardized indices, this study provides a transparent framework for identifying mismatches between transit need and transit supply across major U.S. metropolitan areas.
+By combining these indicators into standardized indices, this project provides a transparent framework for identifying mismatches between transit need and transit supply across major U.S. metropolitan areas.
+
+<br>
 
 ## V. Methodology
 
@@ -114,8 +100,7 @@ To ensure consistency across datasets, several preprocessing steps were applied 
 
 Transit need indicators were derived from the **2024 American Community Survey (ACS) 1-year estimates**, using **Subject Tables**.
 
-Data were filtered to include:
-- All **Metropolitan Statistical Areas (MSAs)** within the United States and Puerto Rico.
+Data were filtered to include all **Metropolitan Statistical Areas (MSAs)** within the United States and Puerto Rico.
 
 Key preprocessing steps included:
 - Sort Top 20 MSAs by total population for analysis.
@@ -144,7 +129,7 @@ Transit service data from the National Transit Database (NTD) were filtered to i
 
 - **Report Year:** 2024  
 - **Time Period:** Annual Total  
-- **Type of Service:** Directly Operated (DO) public transportation  
+- **Type of Service:** Directly Operated (DO) & Purchased Transportation (PT) public transportation  
 
 The following modes were excluded to focus on fixed-route and high-capacity transit services:
 - **Vanpool**
@@ -191,6 +176,9 @@ $$
 = \frac{Z_{\text{noVehicle}} + Z_{\text{transitCommute}} - Z_{\text{income}}}{3}
 $$
 
+#### Why Robust Z-Score Standardization?
+All index components were standardized using **robust z-scores**, which are calculated based on the median and interquartile range (IQR) rather than the mean and standard deviation. This approach reduces the influence of extreme outliers, such as New York’s exceptionally high transit dependence metrics, ensuring that the indices reflect relative differences across MSAs without being skewed by extreme values.
+
 ---
 
 ### 2. Transit Supply Index
@@ -219,8 +207,7 @@ $$
 \text{Transit Gap} = \text{Transit Need Index} - \text{Transit Supply Index}
 $$
 
-Positive values indicate MSAs where transit need exceeds transit supply,  
-while negative values indicate relatively higher levels of transit provision.
+Positive values indicate MSAs where transit need exceeds transit supply, while negative values indicate relatively higher levels of transit provision.
 
 ## VI. Key Findings
 
@@ -260,7 +247,7 @@ To understand the source of these gaps, we decompose the metric into its two con
 - **Key Insight: Minneapolis–St. Paul–Bloomington** is the most statistically representative case. Its Need Index and Supply Index bars are both negligible (hovering near 0.0).
 - **Interpretation:** Unlike the outliers, Minneapolis represents the cohort average. It does not suffer from the extreme inequality of New York, nor does it possess the low-dependency characteristics of San Diego. It is a "balanced" system where service provision closely mirrors the socioeconomic profile of its residents.
 
-![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
+![Top 5 Median Transit Gap](charts/Need&Supply_5MedianGap.png)
 ***Figure 4:** 5 MSAs in the median range*
 
 ---
@@ -287,7 +274,7 @@ Comparing the highest-gap MSA (New York) with the lowest-gap MSA (San Diego):
 ***Figure 6:** New York vs. San Diego*
 
 #### 4.2. **The Outlier vs. The Median** **(New York vs. Minneapolis)** 
-Comparing New York (Highest Gap) with Minneapolis–St. Paul (Median Gap):
+Comparing New York (Highest Gap) with Minneapolis (Median Gap):
 - As shown in the radar charts, New York's polygon completely envelops Minneapolis's across need-based metrics.
 - **The "Representative" MSA:** Minneapolis–St. Paul acts as the statistical baseline for this cohort. Its radar chart forms a nearly perfect symmetrical pentagon, and its Z-scores across all five metrics are effectively zero. This indicates that Minneapolis represents the **average profile** of a top-20 U.S. MSA: balanced deviations between supply and need.
 
@@ -301,7 +288,7 @@ Comparing San Diego & San Francisco (Lowest Gap) with Minneapolis (Median Gap):
 - Insight: This highlights a limitation of the model—in wealthier regions, transit need is not driven by lack of vehicles (captivity) but potentially by choice (lifestyle/traffic), which this socioeconomic "Need Index" does not fully capture.
 
 ![Bottom vs. Median](charts/SD,SF&MI.png)
-*Figure 8: San Diego & San Francisco vs. Minneapolis*
+***Figure 8**: San Diego & San Francisco vs. Minneapolis*
 
 ---
 
@@ -310,21 +297,20 @@ This comparative analysis of the 20 largest U.S. Metropolitan Statistical Areas 
 
 Three distinct typologies of metropolitan transit systems emerge from the data:
 
-- **Need-Dominant Systems (e.g., New York, Chicago):** These regions face a **"Density Dilemma."** They possess the highest levels of transit supply in the nation, yet they still exhibit the largest service gaps. This paradox occurs because their populations are structurally dependent on transit (low car ownership, high ridership) to a degree that outpaces even extensive infrastructure. For these MSAs, "closing the gap" requires not just maintaining current service, but exponentially increasing capacity to meet non-linear demand.
+1. **Need-Dominant Systems (e.g., New York, Chicago):** These regions face a **"Density Dilemma."** They possess the highest levels of transit supply in the nation, yet they still exhibit the largest service gaps. This paradox occurs because their populations are structurally dependent on transit (low car ownership, high ridership) to a degree that outpaces even extensive infrastructure. For these MSAs, "closing the gap" requires not just maintaining current service, but exponentially increasing capacity to meet non-linear demand.
 
-- **Affluence-Dominant Systems (e.g., San Diego, Dallas):** These regions exhibit a statistical "surplus" of transit, but this is a function of demographics rather than infrastructure. With high median incomes and near-universal vehicle access, their calculated "Need" is low. The challenge in these Sunbelt MSAs is not necessarily satisfying basic mobility needs, but rather **inducing demand**—shifting discretionary travelers from private vehicles to public transit to achieve sustainability goals.
-
-- **Balanced / Representative Systems (e.g., Minneapolis, Denver):** These MSAs represent the statistical "mean" of the top 20 cohort. Their service levels are commensurate with their socioeconomic profiles, suggesting a stable equilibrium. However, this equilibrium may also indicate a "middle-income trap," where transit service is adequate for the current user base but insufficient to catalyze a shift away from car dependency.
+2. **Affluence-Dominant Systems (e.g., San Diego, Dallas):** These regions exhibit a statistical "surplus" of transit, but this is a function of demographics rather than infrastructure. With high median incomes and near-universal vehicle access, their calculated "Need" is low. The challenge in these Sunbelt MSAs is not necessarily satisfying basic mobility needs, but rather **inducing demand**—shifting discretionary travelers from private vehicles to public transit to achieve sustainability goals.
+3. **Balanced / Representative Systems (e.g., Minneapolis, Denver):** These MSAs represent the statistical "mean" of the top 20 cohort. Their service levels are commensurate with their socioeconomic profiles, suggesting a stable equilibrium. However, this equilibrium may also indicate a "middle-income trap," where transit service is adequate for the current user base but insufficient to catalyze a shift away from car dependency.
 
 ## VII. Limitations
 
-This study is subject to several data and methodological limitations.
+This project is subject to several data and methodological limitations.
 
 - First, transit service metrics are reported by the National Transit Database at the **Urbanized Area (UZA)** level, while transit need indicators from the American Community Survey are reported at the **Metropolitan Statistical Area (MSA)** level. To reconcile this mismatch, UZA-level transit supply metrics were rescaled to the MSA level using population-based weighting. While this approach is commonly used in spatial analysis, it assumes that transit service is distributed proportionally to population within each UZA and does not capture intra-metropolitan variations in service intensity.
 
 - Second, per-capita transit supply was calculated using the NTD-reported **Service Area Population**, which may differ from total MSA population counts. As a result, per-capita measures may not fully reflect differences in service coverage or accessibility across metropolitan regions.
 
-- Third, although ACS data at the **Urbanized Area (UZA)** level exist, the most recent available UZA-level ACS estimates are from **2020**. Using these data would introduce a substantial temporal mismatch with the 2024 transit service data used in this study. As a result, UZA-level ACS datasets were not used, and transit need was evaluated at the MSA level instead.
+- Third, although ACS data at the **Urbanized Area (UZA)** level exist, the most recent available UZA-level ACS estimates are from **2020**. Using these data would introduce a substantial temporal mismatch with the 2024 transit service data used in this project. As a result, UZA-level ACS datasets were not used, and transit need was evaluated at the MSA level instead.
 
 - Finally, the constructed Transit Need Index and Transit Supply Index use **equal weighting** across all component variables. While this approach ensures transparency and interpretability, it does not account for potential differences in the relative importance of individual indicators, which could influence index values.
 
@@ -346,5 +332,5 @@ This project uses publicly available datasets from the United States Census Bure
 - [Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
 
 ## IX. Authors
-Minh Kiet Tran (Charles Tran)  
 Dung Tri Nguyen (Dune Nguyen)
+Minh Kiet Tran (Charles Tran)  
