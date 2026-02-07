@@ -11,7 +11,7 @@
 ## I. Motivation & Background
 Public transportation plays a critical role in urban mobility in the United States, supporting billions of passenger trips each year and providing essential access to employment, education, and services—particularly for households without reliable access to private vehicles. Ensuring that transit service is aligned with underlying need remains an important challenge for large metropolitan regions.
 
-In practice, the distribution of public transit service across metropolitan areas does not always reflect socioeconomic indicators of transit dependence such as income, vehicle availability, and commuting patterns. Comparing transit need and supply is further complicated by fragmented data structures: measures of transit demand are typically reported at the metropolitan level, while transit service metrics
+In practice, the distribution of public transit service across metropolitan areas does not always reflect socioeconomic indicators of transit dependence, such as income, vehicle availability, and commuting patterns. Comparing transit need and supply is further complicated by fragmented data structures: measures of transit demand are typically reported at the metropolitan level, while transit service metrics
 are reported at the urbanized area level. This project is motivated by the need for a transparent, data-driven framework to compare public transit need and supply across major U.S. metropolitan statistical areas.
 
 ## II. Research Question
@@ -45,21 +45,24 @@ Transit need was approximated using the following variables:
 Each variable was standardized using a **robust z-score** based on the median and interquartile range (IQR).
 The final Transit Need Index is calculated as the unweighted mean of the standardized variables:
 
-$$Transit Need Index = (Z_{noVehicle} + Z_{transitCommute} − Z_{income}) / 3$$
+$$ Transit Need Index = \frac{Z_{noVehicle} + Z_{transitCommute} − Z_{income}}{3}$$
 ### 2. Transit Supply Index
 Transit supply was measured using National Transit Database service metrics:
 
 - Vehicle Revenue Miles (VRM) per capita
 - Vehicle Revenue Hours (VHM) per capita
-- Unlinked Passenger Trips (UPT) per capita
 
 All metrics were aggregated from the transit agency level to the MSA level and normalized by population.
 Standardization followed the same robust z-score approach used for the Transit Need Index.
+The final Transit Supply Index is calculated as the unweighted mean of the standardized variables:
+
+$$ Transit Supply Index = \frac{Z_{VRM per capita} + Z_{VRH per capita}}{2}$$
+
 ### 3. Transit Need–Supply Gap
 
 The Transit Gap metric is defined as the difference between the Transit Need Index and the Transit Supply Index:
 
-Transit Gap = Transit Need Index − Transit Supply Index
+$$ Transit Gap = Transit Need Index − Transit Supply Index $$
 
 Positive values indicate MSAs where transit need exceeds supply,
 while negative values indicate relatively higher levels of transit provision.
@@ -67,6 +70,7 @@ while negative values indicate relatively higher levels of transit provision.
 ## VI. Key Findings
 
 ## VII. Limitations
+- Census data for Urbanized Area is available, however, the data was last updated in 2020, plus the project's scope is MSAs (Need to edit more)
 
 ## VIII. Authors
 Minh Kiet Tran (Charles Tran)  
