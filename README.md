@@ -225,6 +225,51 @@ while negative values indicate relatively higher levels of transit provision.
 ## VI. Key Findings
 
 _For all databases used to calculate standardized values and finalized database [folder](data/processed)_
+
+---
+### 1. Macroscopic Analysis of Transit Gaps
+![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
+***Figure 1:** Transit Gap of Top 20 U.S. MSAs*
+
+**Figure 1** illustrates the distribution of transit disparities across the cohort.
+  - **Service Deficits (Positive Gap):** 9 of the 20 MSAs exhibit a positive gap, indicating that their socioeconomic transit dependence exceeds their relative level of service provision. This group is dominated by "legacy" transit cities with high population density.
+  - **Service Availability (Negative Gap):** 11 of the 20 MSAs exhibit a negative gap. This indicates Supply-Dominance, where service levels are high relative to the socioeconomic dependence of the population (often driven by higher median incomes or high vehicle ownership rates).
+
+---
+
+### 2. Component Analysis: Drivers of the Gap
+To understand the source of these gaps, we decompose the metric into its two constituent indices: **Transit Need** (Green) and **Transit Supply** (Red).
+
+![Top 5 Highest Transit Gap](charts/Need&Supply_5HighestGap.png)
+***Figure 2:** Top 5 MSAs with Highest Transit Gap*
+
+#### A. High-Gap MSAs: The "Need-Driven" Deficit
+- **Observation:** In the top 5 highest-gap MSAs (e.g., **New York, Chicago, Philadelphia**), the disparity is driven almost entirely by the **Need Index (Green Bar)**.
+- **Key Insight:** New York–Newark–Jersey City (NY-NJ) is the most extreme example. Despite having a positive Supply Index (indicating above-average service), its Need Index is astronomically high (>2.5 standard deviations).
+- **Interpretation:** This suggests that for these dense, urbanized regions, even robust transit systems are struggling to keep pace with the extreme transit dependence of their populations. The "deficit" here is not a failure of supply, but a reflection of intense demand.
+
+![Top 5 Lowest Transit Gap](charts/Need&Supply_5LowestGap.png)
+***Figure 3:** Top 5 MSAs with Lowest Transit Gap*
+
+#### B. Low-Gap MSAs: The "Affluence-Driven" Surplus
+- **Observation:** The MSAs with the lowest (most negative) gaps, such as **San Diego** and **Dallas**, display a distinct pattern: their **Need Index (Green Bar) is deeply negative**.
+- **Key Insight:** San Diego–Chula Vista–Carlsbad (CA) has a Need Index of roughly -0.4.
+- **Interpretation:** A negative Need Index implies high median income and high vehicle ownership. The "surplus" (negative gap) in these Sunbelt cities is not caused by having "too much" transit (oversupply), but rather by having a population that is structurally less dependent on it. Their transit infrastructure, while moderate, exceeds the relatively low socioeconomic demand.
+
+![Top 5 Median Trasit Gap](charts/Need&Supply_5MedianGap.png)
+***Figure 4:** 5 MSAs in the median range*
+
+#### C. Median-Gap MSAs: The Representative Baseline
+- **Observation:** The MSAs in the median range (e.g., **Minneapolis, Seattle**) show minimal divergence between need and supply.
+- **Key Insight: Minneapolis–St. Paul–Bloomington** is the most statistically representative case. Its Need Index and Supply Index bars are both negligible (hovering near 0.0).
+- **Interpretation:** Unlike the outliers, Minneapolis represents the cohort average. It does not suffer from the extreme inequality of New York, nor does it possess the low-dependency characteristics of San Diego. It is a "balanced" system where service provision closely mirrors the socioeconomic profile of its residents.
+
+---
+
+### 3. Structural Drivers (Heatmap Analysis)
+![Heatmap](charts/Heatmap.png)
+***Figure 5:** Heatmap for Top 20 *
+
 ### 1. Overall findings
 ![Transit Gap of Top 20 U.S. MSAs](charts/TransitGapTop20MSAs.png)
 - Overall, 9 out of 20 Top 20 U.S. MSAs require urgent transportation upgrades to match their demands. (MSAs marked in green)
