@@ -87,7 +87,7 @@ Together, these variables capture complementary dimensions of public transit sys
 - **Transit Need:** Income, vehicle availability, and commuting behavior  
 - **Transit Supply:** VRM per capita, VRH per capita  
 
-By combining these indicators into standardized indices, this project provides a transparent framework for identifying mismatches between transit need and transit supply across major U.S. metropolitan areas.
+By combining these indicators into standardized indices, this project provides a transparent framework for identifying mismatches between transit need and transit supply across major U.S. metropolitan statistical areas.
 <br>
 
 ## V. Methodology
@@ -187,7 +187,7 @@ S_{MSA} = \sum_{u \in MSA} S_u \times \frac{P_{u \cap MSA}}{P_u}
 $$
 
 where:
-- $S_u$ is the UZA-level transit service metric (VRM or VRH),
+- $S_u$ is the UZA-level transit service metric (VRM per capita or VRH per capita),
 - $P_u$ is the total population of UZA $u$,
 - $P_{u \cap MSA}$ is the population of UZA $u$ within the MSA boundary,
 - $S_{MSA}$ is the estimated transit service for the MSA.
