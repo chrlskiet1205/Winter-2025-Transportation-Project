@@ -24,7 +24,7 @@ The primary unit of analysis is the **Metropolitan Statistical Area**.
 This project focuses on the **20 largest U.S. MSAs by total population**.
 
 Transit *need* indicators are calculated directly at the MSA level using
-American Community Survey (ACS) data.
+United States Census Bureau - American Community Survey (ACS) data.
 
 Transit *supply* indicators are derived from the National Transit Database (NTD),
 which reports service statistics at the **Urbanized Area (UZA)** level.
@@ -110,7 +110,7 @@ $$
 \text{Pct No Vehicle} = \frac{\text{Households with No Vehicle}}{\text{Total Households}}
 $$
 
-using raw ACS data from: [acs_vehicle_ownership_2024.csv](data/raw/census/acs_vehicle_ownership_2024.csv) and stored in: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv)
+using raw ACS data from: [acs_vehicle_ownership_2024.csv](data/raw/census/acs_vehicle_ownership_2024.csv) and stored in: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv).
 - **Public transit share** was calculated as:
 
 $$
@@ -118,7 +118,7 @@ $$
 = \frac{\text{Transit Commuters}}{\text{Total Workers}}
 $$
 
-where both **Transit Commuters** and **Total Workers** were obtained from: [acs_means_of_transport_to_work_2024.csv](data/raw/census/acs_means_of_transport_to_work_2024.csv)
+where both **Transit Commuters** and **Total Workers** were obtained from: [acs_means_of_transport_to_work_2024.csv](data/raw/census/acs_means_of_transport_to_work_2024.csv).  
 The unstandardized transit commute share was exported to: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv) and later merged into the finalized dataset used for index construction.
 
 - **Median household income** was sourced directly from ACS income subject tables.
@@ -137,7 +137,7 @@ The following modes were excluded to focus on fixed-route and high-capacity tran
 
 Transit agencies were first aggregated at the **Urbanized Area (UZA)** level.
 
-Because transit service metrics are reported at the UZA level while transit need indicators are reported at the Metropolitan Statistical Area (MSA) level, UZA-level service metrics were rescaled to the MSA level using population-based weighting.
+Because transit service metrics are reported at the UZA level while transit need indicators are reported at the Metropolitan Statistical Area (MSA) level, UZA-level service metrics were rescaled to the MSA level using population-based weighting. _UZA to MSA mapping file can be found at: [uza_to_msa.csv](data/raw/transportation/output/uza_to_msa.csv)_
 
 For each MSA, transit supply metrics were estimated as the population-weighted sum of overlapping UZAs:
 
@@ -318,18 +318,17 @@ These limitations should be considered when interpreting the results, and future
 
 ## VIII. Data Sources
 This project uses publicly available datasets from the United States Census Bureau and the Federal Transit Administration.    
-### 1. American Community Survey (ACS)  
+### 1. United States Census Bureau
 - [Table B01003: Total Population - Census Bureau Table](https://data.census.gov/table/ACSDT1Y2024.B01003?q=B01003&g=010XX00US$3140000&moe=false)
 - [Table B08301: Means of Transportation to Work](https://data.census.gov/table/ACSDT1Y2024.B08301?q=B08301:+Means+of+Transportation+to+Work&moe=false)
 - [Table B08201: Household Size by Vehicles Available](https://data.census.gov/table/ACSDT1Y2024.B08201?q=b08201&g=010XX00US$31000M1&moe=false)
 - [Table S1903: Median Income in the Past 12 Months (in 2024 Inflation-Adjusted Dollars)](https://data.census.gov/table/ACSST1Y2024.S1903?q=S1903&g=010XX00US$31000M1&moe=false)
+- [Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
 
 ### 2. Federal Transit Administration
 - [National Transit Dataset - Service (by Mode and Time Period)](https://catalog.data.gov/dataset/service-flat-file)
 - [Annual Database Agency Information](https://www.transit.dot.gov/ntd/data-product/2024-annual-database-agency-information)
 
-### 3. United States Census Bureau
-- [Metropolitan Statistical Areas (MSA) References Files](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html)
 
 ## IX. Authors
 Dung Tri Nguyen (Dune Nguyen)  
