@@ -5,8 +5,9 @@
 [![License](https://img.shields.io/badge/license-MIT-red)]()
 
 </div>
-
 <hr>
+
+**Date Completed:** February 7, 2026
 
 ## I. Abstract
 This project presents a comparative analysis of public transit need and supply across the 20 largest U.S. Metropolitan Statistical Areas (MSAs). Transit need is assessed using socioeconomic indicators—median household income, vehicle availability, and the share of workers commuting by public transit—to construct a **Transit Need Index**. Transit service is measured through per-capita Vehicle Revenue Miles (VRM) and Vehicle Revenue Hours (VRH) from the National Transit Database, aggregated from Urbanized Areas (UZAs) to the MSA level to form a **Transit Supply Index**. Both indices are standardized using **robust z-scores** to reduce the influence of extreme values, such as those observed in the New York–Newark–Jersey City metropolitan area. The difference between these indices, defined as the **Transit Gap**, identifies MSAs where transit service does not fully align with population need. Results reveal three distinct typologies of metropolitan transit systems: (1) **Need-Dominant Systems** (e.g., New York, Chicago), where high population dependence exceeds even extensive transit provision; (2) **Affluence-Dominant Systems** (e.g., San Diego, Dallas), where high median incomes and widespread vehicle access result in a relative surplus of transit; and (3) **Balanced / Representative Systems** (e.g., Minneapolis, Denver), where service provision closely aligns with socioeconomic need. These findings indicate that strategies to address transit gaps must consider the underlying dependence and demographic characteristics of each metropolitan area.
