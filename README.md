@@ -87,7 +87,6 @@ Together, these variables capture complementary dimensions of public transit sys
 - **Transit Supply:** VRM per capita, VRH per capita  
 
 By combining these indicators into standardized indices, this project provides a transparent framework for identifying mismatches between transit need and transit supply across major U.S. metropolitan areas.
-
 <br>
 
 ## V. Methodology
@@ -110,7 +109,7 @@ $$
 \text{Pct No Vehicle} = \frac{\text{Households with No Vehicle}}{\text{Total Households}}
 $$
 
-using raw ACS data from: [acs_vehicle_ownership_2024.csv](data/raw/census/acs_vehicle_ownership_2024.csv) and stored in: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv).
+using raw ACS data from [acs_vehicle_ownership_2024.csv](data/raw/census/acs_vehicle_ownership_2024.csv) and stored in [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv).
 - **Public transit share** was calculated as:
 
 $$
@@ -118,10 +117,12 @@ $$
 = \frac{\text{Transit Commuters}}{\text{Total Workers}}
 $$
 
-where both **Transit Commuters** and **Total Workers** were obtained from: [acs_means_of_transport_to_work_2024.csv](data/raw/census/acs_means_of_transport_to_work_2024.csv).  
-The unstandardized transit commute share was exported to: [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv) and later merged into the finalized dataset used for index construction.
+where both **Transit Commuters** and **Total Workers** were obtained from [acs_means_of_transport_to_work_2024.csv](data/raw/census/acs_means_of_transport_to_work_2024.csv).  
+The unstandardized transit commute share was exported to [top20_transit_need.csv](data/cleaned-unmerged/top20_transit_need.csv) and later merged into the finalized dataset used for index construction.
 
 - **Median household income** was sourced directly from ACS income subject tables.
+
+***
 
 #### 0.2 Transit Service Data (Supply)
 
@@ -137,26 +138,14 @@ The following modes were excluded to focus on fixed-route and high-capacity tran
 
 Transit agencies were first aggregated at the **Urbanized Area (UZA)** level.
 
-Because transit service metrics are reported at the UZA level while transit need indicators are reported at the Metropolitan Statistical Area (MSA) level, UZA-level service metrics were rescaled to the MSA level using population-based weighting. _UZA to MSA mapping file can be found at: [uza_to_msa.csv](data/raw/transportation/output/uza_to_msa.csv)_
+Because transit service metrics are reported at the UZA level while transit need indicators are reported at the Metropolitan Statistical Area (MSA) level, UZA-level service metrics were rescaled to the MSA level using population-based weighting. _UZA to MSA mapping file can be found at [uza_to_msa.csv](data/raw/transportation/output/uza_to_msa.csv)_.
 
-For each MSA, transit supply metrics were estimated as the population-weighted sum of overlapping UZAs:
 
-$$
-S_{MSA} = \sum_{u \in MSA} S_u \times \frac{P_{u \cap MSA}}{P_u}
-$$
-
-where:
-- $S_u$ is the UZA-level transit service metric (VRM or VRH),
-- $P_u$ is the total population of UZA $u$,
-- $P_{u \cap MSA}$ is the population of UZA $u$ within the MSA boundary,
-- $S_{MSA}$ is the estimated transit service for the MSA.
-
-Per-capita transit supply was then calculated using the NTD-reported  
-**Service Area Population (`service_area_pop`)**.
+Per-capita transit supply was then calculated using the NTD-reported **Service Area Population (`service_area_pop`)**.
 
 Additional preprocessing steps included:
 - Manual harmonization of **four-digit UZA (UACE) codes** for the Boston and Atlanta regions to match records in the raw NTD service dataset.
-- Exporting the cleaned transit service dataset to: [transit_supply.csv](data/cleaned-unmerged/transit_supply.csv)
+- Exporting the cleaned transit service dataset to [transit_supply.csv](data/cleaned-unmerged/transit_supply.csv).
 ---
 
 ### 1. Transit Need Index
@@ -188,9 +177,21 @@ Transit supply was measured using the following National Transit Database servic
 - **Vehicle Revenue Miles (VRM) per capita**
 - **Vehicle Revenue Hours (VRH) per capita**
 
-After rescaling UZA-level metrics to the MSA level, all variables were standardized using the same robust z-score approach applied to the Transit Need Index.
+All variables were standardized using the same robust z-score approach applied to the Transit Need Index.
 
-The final **Transit Supply Index** was calculated as the unweighted mean of the standardized variables:
+After standardization, for each MSA, transit supply metrics were estimated as the population-weighted sum of overlapping UZAs:
+
+$$
+S_{MSA} = \sum_{u \in MSA} S_u \times \frac{P_{u \cap MSA}}{P_u}
+$$
+
+where:
+- $S_u$ is the UZA-level transit service metric (VRM or VRH),
+- $P_u$ is the total population of UZA $u$,
+- $P_{u \cap MSA}$ is the population of UZA $u$ within the MSA boundary,
+- $S_{MSA}$ is the estimated transit service for the MSA.
+
+The final **Transit Supply Index** was calculated as the unweighted mean of the scaled and standardized variables:
 
 $$
 \text{Transit Supply Index}
